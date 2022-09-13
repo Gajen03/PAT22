@@ -4,6 +4,12 @@
  */
 package UI;
 
+import DBBackend.DB;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 /**
  *
  * @author Gajendran
@@ -28,13 +34,14 @@ public class LoginScreen extends javax.swing.JFrame {
 
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        userNameField = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
-        jPasswordField1 = new javax.swing.JPasswordField();
+        PasswordField = new javax.swing.JPasswordField();
+        errorField = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -74,6 +81,10 @@ public class LoginScreen extends javax.swing.JFrame {
         jButton3.setForeground(new java.awt.Color(255, 255, 255));
         jButton3.setText("Create Account");
 
+        errorField.setFont(new java.awt.Font("Dialog", 1, 11)); // NOI18N
+        errorField.setForeground(new java.awt.Color(255, 0, 0));
+        errorField.setText(" ");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -102,9 +113,12 @@ public class LoginScreen extends javax.swing.JFrame {
                                         .addComponent(jLabel3)
                                         .addGap(64, 64, 64)))
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(jTextField1, javax.swing.GroupLayout.DEFAULT_SIZE, 153, Short.MAX_VALUE)
-                                    .addComponent(jPasswordField1))))))
-                .addContainerGap(230, Short.MAX_VALUE))
+                                    .addComponent(userNameField, javax.swing.GroupLayout.DEFAULT_SIZE, 153, Short.MAX_VALUE)
+                                    .addComponent(PasswordField)))))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(164, 164, 164)
+                        .addComponent(errorField, javax.swing.GroupLayout.PREFERRED_SIZE, 320, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(218, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -115,17 +129,19 @@ public class LoginScreen extends javax.swing.JFrame {
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(userNameField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel2))
                 .addGap(52, 52, 52)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
-                    .addComponent(jPasswordField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(PasswordField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(53, 53, 53)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton2)
                     .addComponent(jButton3))
-                .addContainerGap(126, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(errorField)
+                .addContainerGap(93, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -143,9 +159,35 @@ public class LoginScreen extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        HomeScreen Info = new HomeScreen();
-        Info.setVisible(true);
-        dispose();        // TODO add your handling code here:
+
+        try {
+
+            String username = userNameField.getText();
+            String password = PasswordField.getText();
+
+            DB database = new DB();
+            ResultSet usernameQuery = database.query("SELECT usernames FROM Users WHERE usernames = '" + username + "' ;");
+
+            if (usernameQuery == null) {
+                errorField.setText("Username or Password is incorrect");
+            } else {
+                HomeScreen Info = null;
+                try {
+                    Info = new HomeScreen();
+                } catch (SQLException ex) {
+                    Logger.getLogger(LoginScreen.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (ClassNotFoundException ex) {
+                    Logger.getLogger(LoginScreen.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                Info.setVisible(true);
+                dispose();
+            }
+
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(LoginScreen.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(LoginScreen.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
@@ -184,6 +226,8 @@ public class LoginScreen extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JPasswordField PasswordField;
+    private javax.swing.JLabel errorField;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
@@ -191,7 +235,6 @@ public class LoginScreen extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JPasswordField jPasswordField1;
-    private javax.swing.JTextField jTextField1;
+    private javax.swing.JTextField userNameField;
     // End of variables declaration//GEN-END:variables
 }

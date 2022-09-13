@@ -4,6 +4,10 @@
  */
 package UI;
 
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 /**
  *
  * @author Gajendran
@@ -257,7 +261,14 @@ public class AddMatchResult extends javax.swing.JFrame {
     }//GEN-LAST:event_ScoreRHBMouseClicked
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        HomeScreen Info = new HomeScreen();
+        HomeScreen Info = null;
+        try {
+            Info = new HomeScreen();
+        } catch (SQLException ex) {
+            Logger.getLogger(AddMatchResult.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(AddMatchResult.class.getName()).log(Level.SEVERE, null, ex);
+        }
         Info.setVisible(true);
         dispose();        // TODO add your handling code here:
     }//GEN-LAST:event_jButton1ActionPerformed
