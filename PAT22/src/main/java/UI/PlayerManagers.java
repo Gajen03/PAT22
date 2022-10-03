@@ -49,7 +49,6 @@ public class PlayerManagers extends javax.swing.JFrame {
         nameField = new javax.swing.JTextField();
         surnameField = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
-        ageSpinner = new javax.swing.JSpinner();
         jLabel6 = new javax.swing.JLabel();
         positionCombo = new javax.swing.JComboBox<>();
         jLabel7 = new javax.swing.JLabel();
@@ -60,6 +59,7 @@ public class PlayerManagers extends javax.swing.JFrame {
         plaeyrmanagerErrorLable = new javax.swing.JLabel();
         TeamComboBox = new javax.swing.JComboBox<>();
         addedlable = new javax.swing.JLabel();
+        dateofbirthfield = new javax.swing.JTextField();
 
         jLabel11.setText("jLabel11");
 
@@ -104,7 +104,7 @@ public class PlayerManagers extends javax.swing.JFrame {
 
         jLabel5.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel5.setText("Age");
+        jLabel5.setText("Date of Birth");
 
         jLabel6.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(255, 255, 255));
@@ -140,7 +140,7 @@ public class PlayerManagers extends javax.swing.JFrame {
 
         TeamComboBox.setBackground(new java.awt.Color(0, 0, 51));
         TeamComboBox.setForeground(new java.awt.Color(255, 255, 255));
-        TeamComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "BoysATeam", "BoysBTeam", "GirlsATeam", " " }));
+        TeamComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "RHB Boys First Team" }));
         TeamComboBox.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 TeamComboBoxActionPerformed(evt);
@@ -149,6 +149,10 @@ public class PlayerManagers extends javax.swing.JFrame {
 
         addedlable.setForeground(new java.awt.Color(0, 204, 51));
         addedlable.setText(" ");
+
+        dateofbirthfield.setBackground(new java.awt.Color(0, 0, 51));
+        dateofbirthfield.setForeground(new java.awt.Color(255, 255, 255));
+        dateofbirthfield.setText("DD/MM/YYYY");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -166,8 +170,24 @@ public class PlayerManagers extends javax.swing.JFrame {
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 318, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(197, 197, 197)
+                                .addComponent(jLabel2)
+                                .addContainerGap())
+                            .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGap(43, 43, 43)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addComponent(TeamComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                            .addComponent(nameField)
+                                            .addComponent(surnameField, javax.swing.GroupLayout.DEFAULT_SIZE, 192, Short.MAX_VALUE)
+                                            .addComponent(positionCombo, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                            .addComponent(kitnumberSpinner)
+                                            .addComponent(addedlable, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(plaeyrmanagerErrorLable, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(dateofbirthfield))
+                                        .addGap(94, 94, 94))
                                     .addGroup(jPanel1Layout.createSequentialGroup()
                                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                             .addComponent(jLabel4)
@@ -179,26 +199,7 @@ public class PlayerManagers extends javax.swing.JFrame {
                                             .addComponent(jLabel10))
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 216, Short.MAX_VALUE)
                                         .addComponent(jButton3)
-                                        .addGap(28, 28, 28))
-                                    .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addComponent(TeamComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(197, 197, 197)
-                                .addComponent(jLabel2)
-                                .addContainerGap())
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                        .addComponent(nameField, javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(surnameField, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 192, Short.MAX_VALUE)
-                                        .addComponent(ageSpinner, javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(positionCombo, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(kitnumberSpinner, javax.swing.GroupLayout.Alignment.LEADING))
-                                    .addComponent(addedlable, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(plaeyrmanagerErrorLable, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(94, 94, 94))))))
+                                        .addGap(28, 28, 28))))))))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -222,8 +223,8 @@ public class PlayerManagers extends javax.swing.JFrame {
                         .addGap(46, 46, 46)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel5)
-                            .addComponent(ageSpinner, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(39, 39, 39)
+                            .addComponent(dateofbirthfield, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(40, 40, 40)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel6)
                             .addComponent(positionCombo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -285,7 +286,7 @@ public class PlayerManagers extends javax.swing.JFrame {
         try {
             String name = nameField.getText();
             String surname = surnameField.getText();
-            int age = (int) ageSpinner.getValue();
+            String age =  dateofbirthfield.getText();
             String position = (String)positionCombo.getSelectedItem();
             int kitnumber = (int) kitnumberSpinner.getValue();
             String team = (String)TeamComboBox.getSelectedItem();
@@ -346,7 +347,7 @@ public class PlayerManagers extends javax.swing.JFrame {
     private javax.swing.JList<String> PlayerList;
     private javax.swing.JComboBox<String> TeamComboBox;
     private javax.swing.JLabel addedlable;
-    private javax.swing.JSpinner ageSpinner;
+    private javax.swing.JTextField dateofbirthfield;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
