@@ -8,6 +8,9 @@ package backend;
  *
  * @author Gajendran
  */
-public class Stats {
-    
+public class UserManager {
+    public static boolean checkLogin(String username, String password){
+        
+        return false;
+    }
 }

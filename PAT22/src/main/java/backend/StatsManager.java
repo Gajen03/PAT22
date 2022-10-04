@@ -8,6 +8,6 @@ package backend;
  *
  * @author Gajendran
  */
-public class Teams {
+public class StatsManager {
     
 }

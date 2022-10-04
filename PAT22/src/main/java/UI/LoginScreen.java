@@ -5,10 +5,12 @@
 package UI;
 
 import DBBackend.DB;
+import backend.UserManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -37,9 +39,9 @@ public class LoginScreen extends javax.swing.JFrame {
         userNameField = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
+        closeButton = new javax.swing.JButton();
+        signInButton = new javax.swing.JButton();
+        createAccountButton = new javax.swing.JButton();
         PasswordField = new javax.swing.JPasswordField();
         errorField = new javax.swing.JLabel();
 
@@ -60,29 +62,29 @@ public class LoginScreen extends javax.swing.JFrame {
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));
         jLabel3.setText("Password");
 
-        jButton1.setBackground(new java.awt.Color(0, 0, 102));
-        jButton1.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
-        jButton1.setForeground(new java.awt.Color(255, 255, 255));
-        jButton1.setText("Close");
+        closeButton.setBackground(new java.awt.Color(0, 0, 102));
+        closeButton.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+        closeButton.setForeground(new java.awt.Color(255, 255, 255));
+        closeButton.setText("Close");
 
-        jButton2.setBackground(new java.awt.Color(0, 0, 102));
-        jButton2.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
-        jButton2.setForeground(new java.awt.Color(255, 255, 255));
-        jButton2.setText("Sign-In");
-        jButton2.setBorder(null);
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        signInButton.setBackground(new java.awt.Color(0, 0, 102));
+        signInButton.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+        signInButton.setForeground(new java.awt.Color(255, 255, 255));
+        signInButton.setText("Sign-In");
+        signInButton.setBorder(null);
+        signInButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                signInButtonActionPerformed(evt);
             }
         });
 
-        jButton3.setBackground(new java.awt.Color(0, 0, 102));
-        jButton3.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
-        jButton3.setForeground(new java.awt.Color(255, 255, 255));
-        jButton3.setText("Create Account");
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
+        createAccountButton.setBackground(new java.awt.Color(0, 0, 102));
+        createAccountButton.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+        createAccountButton.setForeground(new java.awt.Color(255, 255, 255));
+        createAccountButton.setText("Create Account");
+        createAccountButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
+                createAccountButtonActionPerformed(evt);
             }
         });
 
@@ -101,14 +103,14 @@ public class LoginScreen extends javax.swing.JFrame {
                         .addComponent(jLabel1))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(jButton1))
+                        .addComponent(closeButton))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(176, 176, 176)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jButton3)
+                                .addComponent(createAccountButton)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 120, Short.MAX_VALUE)
-                                .addComponent(jButton2))
+                                .addComponent(signInButton))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
@@ -129,7 +131,7 @@ public class LoginScreen extends javax.swing.JFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jButton1)
+                .addComponent(closeButton)
                 .addGap(55, 55, 55)
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
@@ -142,8 +144,8 @@ public class LoginScreen extends javax.swing.JFrame {
                     .addComponent(PasswordField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(53, 53, 53)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton2)
-                    .addComponent(jButton3))
+                    .addComponent(signInButton)
+                    .addComponent(createAccountButton))
                 .addGap(18, 18, 18)
                 .addComponent(errorField)
                 .addContainerGap(93, Short.MAX_VALUE))
@@ -163,43 +165,25 @@ public class LoginScreen extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void signInButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_signInButtonActionPerformed
 
-        try {
 
             String username = userNameField.getText();
             String password = PasswordField.getText();
-
-            DB database = new DB();
-            ResultSet usernameQuery = database.query("SELECT usernames FROM Users WHERE usernames = '" + username + "' ;");
-
-            if (usernameQuery == null) {
-                errorField.setText("Username or Password is incorrect");
-            } else {
-                HomeScreen Info = null;
-                try {
-                    Info = new HomeScreen();
-                } catch (SQLException ex) {
-                    Logger.getLogger(LoginScreen.class.getName()).log(Level.SEVERE, null, ex);
-                } catch (ClassNotFoundException ex) {
-                    Logger.getLogger(LoginScreen.class.getName()).log(Level.SEVERE, null, ex);
-                }
-                Info.setVisible(true);
-                dispose();
+            
+            if(UserManager.checkLogin(username,password)){
+                new HomeScreen().setVisible(true);
+                this.dispose();
             }
+            else{
+                JOptionPane.showMessageDialog(this, "Incorrect username/password.", "Login Error", JOptionPane.ERROR_MESSAGE);
+            }
+            
 
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(LoginScreen.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (SQLException ex) {
-            Logger.getLogger(LoginScreen.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_signInButtonActionPerformed
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        LoginScreen Info = new LoginScreen();
-        Info.setVisible(true);
-        dispose();         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton3ActionPerformed
+    private void createAccountButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_createAccountButtonActionPerformed
+    }//GEN-LAST:event_createAccountButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -238,14 +222,19 @@ public class LoginScreen extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPasswordField PasswordField;
+    private javax.swing.JButton closeButton;
+    private javax.swing.JButton createAccountButton;
     private javax.swing.JLabel errorField;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
+    private javax.swing.JComboBox<String> jComboBox16;
+    private javax.swing.JComboBox<String> jComboBox17;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel18;
+    private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel9;
+    private javax.swing.JButton signInButton;
     private javax.swing.JTextField userNameField;
     // End of variables declaration//GEN-END:variables
 }

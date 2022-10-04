@@ -5,11 +5,13 @@
 package UI;
 
 import DBBackend.DB;
+import backend.PlayerManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.DefaultListModel;
 
 /**
  *
@@ -20,10 +22,20 @@ public class PlayerManagers extends javax.swing.JFrame {
     /**
      * Creates new form PlayerManagers
      */
-    public PlayerManagers() {
+    public PlayerManagers() throws SQLException, ClassNotFoundException {
         initComponents();
         
+        String [] names = PlayerManager.getAllPlayers();
+        DefaultListModel model = new DefaultListModel();
+        for (int i = 0; i < names.length; i++) {
+            model.addElement(names[i]);
+            
+        }
         
+        PlayerList.setModel(model);
+        
+        
+        String delName = PlayerList.getSelectedValue();
     }
      
 
@@ -57,9 +69,11 @@ public class PlayerManagers extends javax.swing.JFrame {
         jButton3 = new javax.swing.JButton();
         jLabel10 = new javax.swing.JLabel();
         plaeyrmanagerErrorLable = new javax.swing.JLabel();
-        TeamComboBox = new javax.swing.JComboBox<>();
         addedlable = new javax.swing.JLabel();
         dateofbirthfield = new javax.swing.JTextField();
+        plaeyrmanagerErrorLable1 = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
+        genderBox = new javax.swing.JComboBox<>();
 
         jLabel11.setText("jLabel11");
 
@@ -82,6 +96,7 @@ public class PlayerManagers extends javax.swing.JFrame {
         jLabel1.setText("Player Manager");
 
         PlayerList.setBackground(new java.awt.Color(0, 51, 102));
+        PlayerList.setForeground(new java.awt.Color(255, 255, 255));
         jScrollPane1.setViewportView(PlayerList);
 
         jLabel2.setFont(new java.awt.Font("Dialog", 0, 24)); // NOI18N
@@ -116,7 +131,7 @@ public class PlayerManagers extends javax.swing.JFrame {
 
         jLabel7.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
         jLabel7.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel7.setText("Kit number");
+        jLabel7.setText("Gender");
 
         jButton2.setBackground(new java.awt.Color(0, 0, 102));
         jButton2.setForeground(new java.awt.Color(255, 255, 255));
@@ -138,21 +153,23 @@ public class PlayerManagers extends javax.swing.JFrame {
         plaeyrmanagerErrorLable.setForeground(new java.awt.Color(255, 0, 0));
         plaeyrmanagerErrorLable.setText(" ");
 
-        TeamComboBox.setBackground(new java.awt.Color(0, 0, 51));
-        TeamComboBox.setForeground(new java.awt.Color(255, 255, 255));
-        TeamComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "RHB Boys First Team" }));
-        TeamComboBox.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                TeamComboBoxActionPerformed(evt);
-            }
-        });
-
         addedlable.setForeground(new java.awt.Color(0, 204, 51));
         addedlable.setText(" ");
 
         dateofbirthfield.setBackground(new java.awt.Color(0, 0, 51));
         dateofbirthfield.setForeground(new java.awt.Color(255, 255, 255));
         dateofbirthfield.setText("DD/MM/YYYY");
+
+        plaeyrmanagerErrorLable1.setForeground(new java.awt.Color(255, 0, 0));
+        plaeyrmanagerErrorLable1.setText(" ");
+
+        jLabel8.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
+        jLabel8.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel8.setText("Kit number");
+
+        genderBox.setBackground(new java.awt.Color(0, 0, 51));
+        genderBox.setForeground(new java.awt.Color(255, 255, 255));
+        genderBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "M", "F" }));
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -177,29 +194,42 @@ public class PlayerManagers extends javax.swing.JFrame {
                                 .addGap(43, 43, 43)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addComponent(TeamComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(0, 112, Short.MAX_VALUE)
+                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                                .addGap(204, 204, 204)
+                                                .addComponent(addedlable, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                                .addComponent(plaeyrmanagerErrorLable1, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                .addComponent(plaeyrmanagerErrorLable, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                        .addGap(94, 94, 94))
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addComponent(jLabel10)
+                                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addComponent(jButton2)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(jButton3)
+                                        .addGap(110, 110, 110))
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addGap(19, 19, 19)
+                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(jLabel7)
+                                            .addComponent(jLabel6)
+                                            .addComponent(jLabel5)
+                                            .addComponent(jLabel4)
+                                            .addComponent(jLabel3)
+                                            .addComponent(jLabel8))
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                             .addComponent(nameField)
-                                            .addComponent(surnameField, javax.swing.GroupLayout.DEFAULT_SIZE, 192, Short.MAX_VALUE)
+                                            .addComponent(surnameField)
                                             .addComponent(positionCombo, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                            .addComponent(kitnumberSpinner)
-                                            .addComponent(addedlable, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(plaeyrmanagerErrorLable, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(dateofbirthfield))
-                                        .addGap(94, 94, 94))
-                                    .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(jLabel4)
-                                            .addComponent(jLabel3)
-                                            .addComponent(jLabel5)
-                                            .addComponent(jLabel6)
-                                            .addComponent(jLabel7)
-                                            .addComponent(jButton2)
-                                            .addComponent(jLabel10))
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 216, Short.MAX_VALUE)
-                                        .addComponent(jButton3)
-                                        .addGap(28, 28, 28))))))))
+                                            .addComponent(dateofbirthfield, javax.swing.GroupLayout.DEFAULT_SIZE, 297, Short.MAX_VALUE)
+                                            .addComponent(genderBox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                            .addComponent(kitnumberSpinner))
+                                        .addContainerGap())))))))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -208,45 +238,50 @@ public class PlayerManagers extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton1)
                     .addComponent(jLabel1))
+                .addGap(37, 37, 37)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(37, 37, 37)
                         .addComponent(jLabel2)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel3)
-                            .addComponent(nameField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(43, 43, 43)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel4)
-                            .addComponent(surnameField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(46, 46, 46)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel5)
-                            .addComponent(dateofbirthfield, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(40, 40, 40)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel6)
-                            .addComponent(positionCombo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(52, 52, 52)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel7)
-                            .addComponent(kitnumberSpinner, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(TeamComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(addedlable))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(plaeyrmanagerErrorLable)
-                        .addGap(18, 18, Short.MAX_VALUE)
+                            .addComponent(nameField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel3))
+                        .addGap(31, 31, 31)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(surnameField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel4))
+                        .addGap(27, 27, 27)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(dateofbirthfield, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel5))
+                        .addGap(27, 27, 27)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(positionCombo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel6))
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(18, 18, 18)
+                                .addComponent(kitnumberSpinner, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(26, 26, 26)
+                                .addComponent(jLabel8)))
+                        .addGap(39, 39, 39)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel7)
+                            .addComponent(genderBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(69, 69, 69)
+                        .addComponent(addedlable)
+                        .addGap(15, 15, 15)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(plaeyrmanagerErrorLable)
+                            .addComponent(plaeyrmanagerErrorLable1))
+                        .addGap(18, 27, Short.MAX_VALUE)
                         .addComponent(jLabel10)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jButton2)
                             .addComponent(jButton3)))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 476, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(jScrollPane1))
                 .addGap(23, 23, 23))
         );
 
@@ -268,45 +303,37 @@ public class PlayerManagers extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         HomeScreen Info = null;
-        try {
-            Info = new HomeScreen();
-        } catch (SQLException ex) {
-            Logger.getLogger(PlayerManagers.class.getName()).log(Level.SEVERE, null, ex);
-            
-            //show error on screen
-            
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(PlayerManagers.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        Info = new HomeScreen();
+        //show error on screen
         Info.setVisible(true);
         dispose();        // TODO add your handling code here:
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+       
+            
+         
         try {
             String name = nameField.getText();
             String surname = surnameField.getText();
             String age =  dateofbirthfield.getText();
             String position = (String)positionCombo.getSelectedItem();
             int kitnumber = (int) kitnumberSpinner.getValue();
-            String team = (String)TeamComboBox.getSelectedItem();
-            DB database = new DB();
+            String gender = (String)genderBox.getSelectedItem();
             
-            database.update("INSERT INTO `gajendranDB`.`"+team+"` (`Kit number`, `Names`, `Surnames`, `Position`,`Age`) VALUES ('"+kitnumber+"','"+name+"', '"+surname+"', '"+position+"','"+age+"');");
+            PlayerManager.addPlayer(name, surname, age, position, kitnumber, gender);
             // TODO add your handling code here:
             addedlable.setText("PLAYER ADDED");
             plaeyrmanagerErrorLable.setText(" ");
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(PlayerManagers.class.getName()).log(Level.SEVERE, null, ex);
         } catch (SQLException ex) {
             Logger.getLogger(PlayerManagers.class.getName()).log(Level.SEVERE, null, ex);
-            plaeyrmanagerErrorLable.setText("Kit number already exists.");
+            plaeyrmanagerErrorLable.setText("kit number already exists");
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(PlayerManagers.class.getName()).log(Level.SEVERE, null, ex);
+            
         }
+      
     }//GEN-LAST:event_jButton3ActionPerformed
-
-    private void TeamComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TeamComboBoxActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_TeamComboBoxActionPerformed
 
     /**
      * @param args the command line arguments
@@ -338,16 +365,22 @@ public class PlayerManagers extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new PlayerManagers().setVisible(true);
+                try {
+                    new PlayerManagers().setVisible(true);
+                } catch (SQLException ex) {
+                    Logger.getLogger(PlayerManagers.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (ClassNotFoundException ex) {
+                    Logger.getLogger(PlayerManagers.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JList<String> PlayerList;
-    private javax.swing.JComboBox<String> TeamComboBox;
     private javax.swing.JLabel addedlable;
     private javax.swing.JTextField dateofbirthfield;
+    private javax.swing.JComboBox<String> genderBox;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
@@ -360,12 +393,14 @@ public class PlayerManagers extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSpinner kitnumberSpinner;
     private javax.swing.JTextField nameField;
     private javax.swing.JLabel plaeyrmanagerErrorLable;
+    private javax.swing.JLabel plaeyrmanagerErrorLable1;
     private javax.swing.JComboBox<String> positionCombo;
     private javax.swing.JTextField surnameField;
     // End of variables declaration//GEN-END:variables

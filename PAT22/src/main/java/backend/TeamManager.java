@@ -8,6 +8,8 @@ package backend;
  *
  * @author Gajendran
  */
-public class Results {
-    
+public class TeamManager {
+    public static String [] getTeamNames(){
+        return null;
+    }
 }
