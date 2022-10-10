@@ -136,6 +136,11 @@ public class PlayerManagers extends javax.swing.JFrame {
         jButton2.setBackground(new java.awt.Color(0, 0, 102));
         jButton2.setForeground(new java.awt.Color(255, 255, 255));
         jButton2.setText("Delete");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         jButton3.setBackground(new java.awt.Color(0, 0, 102));
         jButton3.setForeground(new java.awt.Color(255, 255, 255));
@@ -303,7 +308,13 @@ public class PlayerManagers extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         HomeScreen Info = null;
-        Info = new HomeScreen();
+        try {
+            Info = new HomeScreen();
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(PlayerManagers.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(PlayerManagers.class.getName()).log(Level.SEVERE, null, ex);
+        }
         //show error on screen
         Info.setVisible(true);
         dispose();        // TODO add your handling code here:
@@ -334,6 +345,15 @@ public class PlayerManagers extends javax.swing.JFrame {
         }
       
     }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+//        String player = PlayerList.getSelectedValue();
+//        String index = player.
+//        String name = player.substring(0, WIDTH);
+//        String surname = player.substring(player.length()-1,' ');
+//        System.out.println("");
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
      * @param args the command line arguments

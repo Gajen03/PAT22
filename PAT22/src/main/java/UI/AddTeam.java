@@ -5,6 +5,7 @@
 package UI;
 
 import DBBackend.DB;
+import backend.TeamManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -46,10 +47,11 @@ public class AddTeam extends javax.swing.JFrame {
         plaeyrmanagerErrorLable = new javax.swing.JLabel();
         addedlable = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
-        nameField1 = new javax.swing.JTextField();
+        schoolfield = new javax.swing.JTextField();
         jLabel9 = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
-        nameField2 = new javax.swing.JTextField();
+        coachfield = new javax.swing.JTextField();
+        successfuladd = new javax.swing.JLabel();
 
         jLabel11.setText("jLabel11");
 
@@ -93,8 +95,8 @@ public class AddTeam extends javax.swing.JFrame {
         jLabel8.setForeground(new java.awt.Color(255, 255, 255));
         jLabel8.setText("Team Name");
 
-        nameField1.setBackground(new java.awt.Color(0, 0, 51));
-        nameField1.setForeground(new java.awt.Color(255, 255, 255));
+        schoolfield.setBackground(new java.awt.Color(0, 0, 51));
+        schoolfield.setForeground(new java.awt.Color(255, 255, 255));
 
         jLabel9.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
         jLabel9.setForeground(new java.awt.Color(255, 255, 255));
@@ -104,8 +106,12 @@ public class AddTeam extends javax.swing.JFrame {
         jLabel12.setForeground(new java.awt.Color(255, 255, 255));
         jLabel12.setText("Team Coach");
 
-        nameField2.setBackground(new java.awt.Color(0, 0, 51));
-        nameField2.setForeground(new java.awt.Color(255, 255, 255));
+        coachfield.setBackground(new java.awt.Color(0, 0, 51));
+        coachfield.setForeground(new java.awt.Color(255, 255, 255));
+
+        successfuladd.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
+        successfuladd.setForeground(new java.awt.Color(0, 255, 0));
+        successfuladd.setText(" ");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -115,33 +121,33 @@ public class AddTeam extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
-                        .addComponent(jButton1)
-                        .addGap(101, 101, 101)
-                        .addComponent(jLabel1)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(jPanel1Layout.createSequentialGroup()
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(addedlable, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(plaeyrmanagerErrorLable, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGap(193, 193, 193))
-                        .addGroup(jPanel1Layout.createSequentialGroup()
-                            .addGap(56, 56, 56)
-                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addGroup(jPanel1Layout.createSequentialGroup()
-                                    .addComponent(jLabel9)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(nameField1, javax.swing.GroupLayout.PREFERRED_SIZE, 192, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGroup(jPanel1Layout.createSequentialGroup()
-                                    .addComponent(jLabel8)
-                                    .addGap(62, 62, 62)
-                                    .addComponent(nameField, javax.swing.GroupLayout.PREFERRED_SIZE, 192, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
-                                    .addComponent(jLabel12)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(nameField2, javax.swing.GroupLayout.PREFERRED_SIZE, 192, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addGap(0, 29, Short.MAX_VALUE)))))
+                        .addGap(56, 56, 56)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(jLabel9)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(schoolfield, javax.swing.GroupLayout.PREFERRED_SIZE, 192, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(jLabel8)
+                                .addGap(62, 62, 62)
+                                .addComponent(nameField, javax.swing.GroupLayout.PREFERRED_SIZE, 192, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
+                                .addComponent(jLabel12)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(coachfield, javax.swing.GroupLayout.PREFERRED_SIZE, 192, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(0, 29, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
+                                .addComponent(jButton1)
+                                .addGap(101, 101, 101)
+                                .addComponent(jLabel1))
+                            .addComponent(addedlable, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
+                                .addComponent(plaeyrmanagerErrorLable, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(52, 52, 52)
+                                .addComponent(successfuladd, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(218, 218, 218)
                 .addComponent(jButton3)
@@ -165,18 +171,20 @@ public class AddTeam extends javax.swing.JFrame {
                 .addGap(44, 44, 44)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel9)
-                    .addComponent(nameField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(schoolfield, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(35, 35, 35)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel12)
-                    .addComponent(nameField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(coachfield, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(55, 55, 55)
                 .addComponent(jButton3)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(addedlable)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(plaeyrmanagerErrorLable)
-                .addContainerGap(100, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(plaeyrmanagerErrorLable)
+                    .addComponent(successfuladd))
+                .addContainerGap(93, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -196,13 +204,10 @@ public class AddTeam extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         HomeScreen Info = null;
         try {
-            Info = new HomeScreen();
-        } catch (SQLException ex) {
-            Logger.getLogger(AddTeam.class.getName()).log(Level.SEVERE, null, ex);
-            
-            //show error on screen
-            
+            Info = new HomeScreen(); //show error on screen
         } catch (ClassNotFoundException ex) {
+            Logger.getLogger(AddTeam.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
             Logger.getLogger(AddTeam.class.getName()).log(Level.SEVERE, null, ex);
         }
         Info.setVisible(true);
@@ -210,7 +215,19 @@ public class AddTeam extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        try {
+            String teamName = nameField.getText();
+            String schoolName = schoolfield.getText();
+            String coach = coachfield.getText();
+            
+            TeamManager.addTeam(teamName, schoolName, coach);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(AddTeam.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(AddTeam.class.getName()).log(Level.SEVERE, null, ex);
+        }
         
+        successfuladd.setText("TEAM ADDED");
     }//GEN-LAST:event_jButton3ActionPerformed
 
     /**
@@ -251,6 +268,7 @@ public class AddTeam extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel addedlable;
+    private javax.swing.JTextField coachfield;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
@@ -261,8 +279,8 @@ public class AddTeam extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JTextField nameField;
-    private javax.swing.JTextField nameField1;
-    private javax.swing.JTextField nameField2;
     private javax.swing.JLabel plaeyrmanagerErrorLable;
+    private javax.swing.JTextField schoolfield;
+    private javax.swing.JLabel successfuladd;
     // End of variables declaration//GEN-END:variables
 }

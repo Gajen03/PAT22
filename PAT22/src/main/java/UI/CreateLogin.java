@@ -6,6 +6,7 @@
 package UI;
 
 import DBBackend.DB;
+import backend.UserManager;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -40,6 +41,7 @@ public class CreateLogin extends javax.swing.JFrame {
         jButton1 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
         passwordfield = new javax.swing.JPasswordField();
+        newLOgin = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -78,10 +80,18 @@ public class CreateLogin extends javax.swing.JFrame {
             }
         });
 
+        newLOgin.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        newLOgin.setForeground(new java.awt.Color(0, 204, 0));
+        newLOgin.setText(" ");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addGap(0, 139, Short.MAX_VALUE)
+                .addComponent(jLabel1)
+                .addGap(131, 131, 131))
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
@@ -101,12 +111,11 @@ public class CreateLogin extends javax.swing.JFrame {
                             .addComponent(passwordfield)))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(249, 249, 249)
-                        .addComponent(jButton3)))
+                        .addComponent(jButton3))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(200, 200, 200)
+                        .addComponent(newLOgin, javax.swing.GroupLayout.PREFERRED_SIZE, 251, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addGap(0, 139, Short.MAX_VALUE)
-                .addComponent(jLabel1)
-                .addGap(131, 131, 131))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -125,7 +134,9 @@ public class CreateLogin extends javax.swing.JFrame {
                     .addComponent(passwordfield, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(49, 49, 49)
                 .addComponent(jButton3)
-                .addContainerGap(130, Short.MAX_VALUE))
+                .addGap(33, 33, 33)
+                .addComponent(newLOgin)
+                .addContainerGap(82, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -147,9 +158,8 @@ public class CreateLogin extends javax.swing.JFrame {
             String username = usernameField.getText();
             String password = passwordfield.getText();
             
-            DB database = new DB();
-            
-            database.update("INSERT INTO `gajendranDB`.`Users` (`usernames`,`password`) VALUES ('"+username+"','"+password+"');");
+            UserManager.addUser(username, password);
+            newLOgin.setText("ACCOUNT CREATED\n");
 // TODO add your handling code here:
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(CreateLogin.class.getName()).log(Level.SEVERE, null, ex);
@@ -206,6 +216,7 @@ public class CreateLogin extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JLabel newLOgin;
     private javax.swing.JPasswordField passwordfield;
     private javax.swing.JTextField usernameField;
     // End of variables declaration//GEN-END:variables

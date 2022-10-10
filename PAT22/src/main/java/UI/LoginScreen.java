@@ -168,21 +168,31 @@ public class LoginScreen extends javax.swing.JFrame {
     private void signInButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_signInButtonActionPerformed
 
 
+        try {
             String username = userNameField.getText();
             String password = PasswordField.getText();
-            
-            if(UserManager.checkLogin(username,password)){
+            boolean check = UserManager.checkLogin(username, password);
+            if(check == true){
                 new HomeScreen().setVisible(true);
                 this.dispose();
             }
             else{
                 JOptionPane.showMessageDialog(this, "Incorrect username/password.", "Login Error", JOptionPane.ERROR_MESSAGE);
             }
+        } catch (SQLException ex) {
+            Logger.getLogger(LoginScreen.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(LoginScreen.class.getName()).log(Level.SEVERE, null, ex);
+        }
             
 
     }//GEN-LAST:event_signInButtonActionPerformed
 
     private void createAccountButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_createAccountButtonActionPerformed
+        CreateLogin Info = null;
+        Info = new CreateLogin(); //show error on screen
+        Info.setVisible(true);
+        dispose(); 
     }//GEN-LAST:event_createAccountButtonActionPerformed
 
     /**

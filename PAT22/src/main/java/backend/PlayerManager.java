@@ -106,8 +106,8 @@ public class PlayerManager {
         
         ResultSet player = database.query("SELECT Name,Surname FROM Players WHERE Age >= '%2005'");
     
-        
-        
+        return;
+         // figure out what to return 
         
     }
     
@@ -118,7 +118,7 @@ public class PlayerManager {
     
     public static void removePlayer(String name, String surname) throws SQLException, ClassNotFoundException{
         DB database = new DB();
-        database.update("DELETE FROM Players WHERE Name = '"+name+";");
+        database.update("DELETE FROM Players WHERE Name = '"+name+"' AND Surname = '"+surname+"';");
     }
     
     public static String[] getAllPlayers() throws SQLException, ClassNotFoundException {
