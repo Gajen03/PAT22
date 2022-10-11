@@ -15,19 +15,17 @@ import java.util.ArrayList;
  */
 public class PlayerManager {
 
-    public static final int AGE_13 = 0;
-    public static final int AGE_14 = 1;
-    public static final int AGE_15 = 2;
-    public static final int AGE_16 = 3;
-    public static final int AGE_OPEN = 4;
-    public static final int AGE_ALL = 5;
+    public static final int AGE_13 = 13;
+    public static final int AGE_14 = 14;
+    public static final int AGE_15 = 15;
+    public static final int AGE_16 = 16;
+    public static final int AGE_OPEN = 17;
+    public static final int AGE_ALL = 0;
     
-    public static final int GENDER_MALE = 0;
-    public static final int GENDER_FEMALE = 1;
-    public static final int GENDER_ALL = 1;
-    
-    
-//    
+    public static final char GENDER_MALE = 'M';
+    public static final char GENDER_FEMALE = 'F';
+    public static final char GENDER_ALL = 'A';
+  
 //    public static String[][] getPlayersInfoForTeam(String teamName) throws SQLException, ClassNotFoundException {
 //        DB database = new DB();
 //        
@@ -81,37 +79,56 @@ public class PlayerManager {
 //        return outputTable;
 //    }
 //    
-    public static String[] getFilteredPlayersName(String [] names,int gender,int age) throws ClassNotFoundException, SQLException{
+    //
+    public static String[] getFilteredPlayersName(String [] names,char gender,int age) throws ClassNotFoundException, SQLException{
         DB database = new DB();
         
         String namesInQuery = "";
         String genderInQuery = "";
         String ageInQuery = "";
         
-        String query = "SELECT Name, Surname FROM Players";
-        
-        if(names != null){
-            String namesSQL = "(";
-            for (int i = 0; i < names.length; i++) {
-                namesSQL += "\""+ names[i] + "\",";
+        String query = "SELECT Players.Name, Players.Surname FROM Players";
+        if(gender != PlayerManager.GENDER_ALL || age != PlayerManager.AGE_ALL){
+            query += " WHERE ";
+            if(gender != PlayerManager.GENDER_ALL){
+                query += " Gender = " + gender;
             }
-            namesSQL = namesSQL.substring(0, namesSQL.length()-1) + ")";
             
             
+            if(gender != PlayerManager.GENDER_ALL && age != PlayerManager.AGE_ALL){
+                query += " AND ";
+            }
             
-            query += " WHERE CONCAT(Name,' ',Surname) NOT IN " + namesSQL;
-        }
-        
+            
+            if(age != PlayerManager.AGE_ALL){
+                query += " Age = " + age;
+            }
+        }  
         query +=";";
-        
-        ResultSet player = database.query("SELECT Name,Surname FROM Players WHERE Age >= '%2005'");
     
-        return;
+        
+        
+        ResultSet dbData = database.query();
+        String[] players = new String[numRows];
+        int count = 0;
+        
+        
+        
+        while (dbData.next()) {
+            players[count] = dbData.getString("Name") + " " + dbData.getString("Surname");
+          
+
+            count++;
+        }
+      
+        
+        
+        return ;
          // figure out what to return 
         
     }
     
-    public static void addPlayer(String name,String surname,String  age,String position,int kitnumber,String gender) throws SQLException, ClassNotFoundException{
+    public static void addPlayer(String name,String surname,String age,String position,int kitnumber,String gender) throws SQLException, ClassNotFoundException{
         DB database = new DB();
         database.update("INSERT INTO Players (Players.Name,Surname,Age,Position,KitNumber,Gender) VALUES ('"+name+"', '"+surname+"', '"+age+"','"+position+"','"+kitnumber+"','"+gender+"');");
     }
@@ -131,18 +148,18 @@ public class PlayerManager {
 
 
         ResultSet dbData = database.query("SELECT Players.Name , Players.Surname  FROM Players;");
-        String[] outputTable = new String[numRows];
+        String[] players = new String[numRows];
         int count = 0;
         
         
         while (dbData.next()) {
-            outputTable[count] = dbData.getString("Name") + " " + dbData.getString("Surname");
+            players[count] = dbData.getString("Name") + " " + dbData.getString("Surname");
           
 
             count++;
         }
       
         
-        return outputTable;
+        return players;
     }
 }

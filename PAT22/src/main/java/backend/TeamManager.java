@@ -22,13 +22,13 @@ public class TeamManager {
         int numRows = countQueryTeamPlayer.getInt(1);
 
 
-        ResultSet dbData = database.query("SELECT Teams.Name  FROM Teams;");
+        ResultSet getTeamNames = database.query("SELECT Teams.Name  FROM Teams;");
         String[] outputTable = new String[numRows];
         int count = 0;
         
         
-        while (dbData.next()) {
-            outputTable[count] = dbData.getString("Name");
+        while (getTeamNames.next()) {
+            outputTable[count] = getTeamNames.getString("Name");
           
 
             count++;
@@ -104,8 +104,18 @@ public class TeamManager {
         return getCoachNameQuery.toString();
         
     }
-
-
+    
+    public static void addPlayerToTeam(String PlayerID,String TeamID) throws ClassNotFoundException, SQLException{
+        DB database = new DB();
+        database.update("INSERT INTO TeamPlayer(TeamID,PlayerID) VALUES ('"+TeamID+"','"+PlayerID+"');");
+       
+        
+    }
+    
+    public static void deletePlayerFromTeam(String PlayerID,String TeamID){
+        
+    }
+    
 
 
 

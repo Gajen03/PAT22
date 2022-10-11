@@ -25,7 +25,7 @@ public class UserManager {
         ResultSet getUsernameAndPassword = database.query("SELECT COUNT(*) FROM Users WHERE usernames = '"+username+"' AND password = '"+password+"';");
         String check = DB.toString(getUsernameAndPassword);
         
-        if(check == "#1\\n"){
+        if(check == "1"){
             return true;
         }else{
             return false;
