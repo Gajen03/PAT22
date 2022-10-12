@@ -23,13 +23,10 @@ public class UserManager {
     public static boolean checkLogin(String username, String password) throws SQLException, ClassNotFoundException{
         DB database = new DB();
         ResultSet getUsernameAndPassword = database.query("SELECT COUNT(*) FROM Users WHERE usernames = '"+username+"' AND password = '"+password+"';");
-        String check = DB.toString(getUsernameAndPassword);
+        getUsernameAndPassword.next();
+        int check = getUsernameAndPassword.getInt(1);
         
-        if(check == "1"){
-            return true;
-        }else{
-            return false;
-        }
+        return check == 1;
  
     }
 }

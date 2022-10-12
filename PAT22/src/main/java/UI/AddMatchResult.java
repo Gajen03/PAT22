@@ -4,9 +4,11 @@
  */
 package UI;
 
+import backend.TeamManager;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.DefaultComboBoxModel;
 
 /**
  *
@@ -17,8 +19,9 @@ public class AddMatchResult extends javax.swing.JFrame {
     /**
      * Creates new form AddMatchResult
      */
-    public AddMatchResult() {
+    public AddMatchResult() throws SQLException, ClassNotFoundException {
         initComponents();
+        
     }
 
     /**
@@ -52,7 +55,7 @@ public class AddMatchResult extends javax.swing.JFrame {
         jComboBox11 = new javax.swing.JComboBox<>();
         jComboBox12 = new javax.swing.JComboBox<>();
         jComboBox13 = new javax.swing.JComboBox<>();
-        jComboBox6 = new javax.swing.JComboBox<>();
+        ReddamTeamSelector = new javax.swing.JComboBox<>();
         jLabel8 = new javax.swing.JLabel();
         jComboBox14 = new javax.swing.JComboBox<>();
         jComboBox15 = new javax.swing.JComboBox<>();
@@ -166,9 +169,14 @@ public class AddMatchResult extends javax.swing.JFrame {
             }
         });
 
-        jComboBox6.setBackground(new java.awt.Color(0, 0, 102));
-        jComboBox6.setForeground(new java.awt.Color(255, 255, 255));
-        jComboBox6.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        ReddamTeamSelector.setBackground(new java.awt.Color(0, 0, 102));
+        ReddamTeamSelector.setForeground(new java.awt.Color(255, 255, 255));
+        ReddamTeamSelector.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        ReddamTeamSelector.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ReddamTeamSelectorActionPerformed(evt);
+            }
+        });
 
         jLabel8.setFont(new java.awt.Font("Gill Sans Nova", 1, 18)); // NOI18N
         jLabel8.setForeground(new java.awt.Color(255, 255, 255));
@@ -276,7 +284,7 @@ public class AddMatchResult extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jLabel2)
                 .addGap(26, 26, 26)
-                .addComponent(jComboBox6, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(ReddamTeamSelector, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(21, 21, 21)
@@ -350,7 +358,7 @@ public class AddMatchResult extends javax.swing.JFrame {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jComboBox6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(ReddamTeamSelector, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel2))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -612,6 +620,11 @@ public class AddMatchResult extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField1ActionPerformed
 
+    private void ReddamTeamSelectorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ReddamTeamSelectorActionPerformed
+        
+        // TODO add your handling code here:
+    }//GEN-LAST:event_ReddamTeamSelectorActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -642,12 +655,20 @@ public class AddMatchResult extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new AddMatchResult().setVisible(true);
+                try {
+                    new AddMatchResult().setVisible(true);
+                } catch (SQLException ex) {
+                    Logger.getLogger(AddMatchResult.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (ClassNotFoundException ex) {
+                    Logger.getLogger(AddMatchResult.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JComboBox<String> ReddamTeamSelector;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JComboBox<String> jComboBox1;
@@ -664,7 +685,6 @@ public class AddMatchResult extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> jComboBox3;
     private javax.swing.JComboBox<String> jComboBox4;
     private javax.swing.JComboBox<String> jComboBox5;
-    private javax.swing.JComboBox<String> jComboBox6;
     private javax.swing.JComboBox<String> jComboBox7;
     private javax.swing.JComboBox<String> jComboBox8;
     private javax.swing.JComboBox<String> jComboBox9;

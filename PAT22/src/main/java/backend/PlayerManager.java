@@ -80,7 +80,7 @@ public class PlayerManager {
 //    }
 //    
     //
-    public static String[] getFilteredPlayersName(String [] names,char gender,int age) throws ClassNotFoundException, SQLException{
+    public static String[] getFilteredPlayerNames(char gender,int age) throws ClassNotFoundException, SQLException{
         DB database = new DB();
         
         String namesInQuery = "";
@@ -108,22 +108,17 @@ public class PlayerManager {
     
         
         
-        ResultSet dbData = database.query();
-        String[] players = new String[numRows];
+        ResultSet dbData = database.query(query);
+        String[] players = new String[10000];
         int count = 0;
-        
-        
-        
         while (dbData.next()) {
             players[count] = dbData.getString("Name") + " " + dbData.getString("Surname");
-          
-
             count++;
         }
       
         
         
-        return ;
+        return players;
          // figure out what to return 
         
     }

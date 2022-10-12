@@ -5,6 +5,7 @@
 package backend;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.Arrays;
 
 /**
@@ -13,7 +14,10 @@ import java.util.Arrays;
  */
 public class test {
     public static void main(String[] args) throws SQLException, ClassNotFoundException {
-        System.out.println(Arrays.toString(PlayerManager.getAllPlayers()));
+       
+  
+
+        
     }
    
 }

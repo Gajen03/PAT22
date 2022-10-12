@@ -172,9 +172,10 @@ public class LoginScreen extends javax.swing.JFrame {
             String username = userNameField.getText();
             String password = PasswordField.getText();
             boolean check = UserManager.checkLogin(username, password);
-            if(check == true){
-                new HomeScreen().setVisible(true);
-                this.dispose();
+            if(check){
+                HomeScreen Info = new HomeScreen();
+                Info.setVisible(true);
+                dispose();
             }
             else{
                 JOptionPane.showMessageDialog(this, "Incorrect username/password.", "Login Error", JOptionPane.ERROR_MESSAGE);

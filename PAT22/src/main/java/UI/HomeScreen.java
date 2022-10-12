@@ -6,7 +6,9 @@ package UI;
 
 import DBBackend.DB;
 import backend.PlayerManager;
+import backend.StatsManager;
 import backend.TeamManager;
+import java.sql.Array;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -32,39 +34,34 @@ public class HomeScreen extends javax.swing.JFrame {
                 String team = (String)TeamSelecterCombo.getSelectedItem();
                 
                 DefaultListModel<String> list = new DefaultListModel();
-                
                 PlayerJList.setListData(PlayerManager.getAllPlayers());
+      
             } catch (SQLException ex) {
                 Logger.getLogger(HomeScreen.class.getName()).log(Level.SEVERE, null, ex);
             } catch (ClassNotFoundException ex) {
                 Logger.getLogger(HomeScreen.class.getName()).log(Level.SEVERE, null, ex);
             }
+   
             String teamName = (String) TeamSheetCombo.getSelectedItem();
             TeamSelectedLable.setText((String) TeamSheetCombo.getSelectedItem());
             String[] columnNames = TeamManager.getPlayerInfoHeaders();
             String[][] data = TeamManager.getPlayersInfoForTeam(teamName);
             DefaultTableModel dataMod = new DefaultTableModel(data, columnNames);
             playersTable.setModel(dataMod);
-            String[] teamNames = TeamManager.getTeamNames();
+            
         } catch (SQLException ex) {
             Logger.getLogger(HomeScreen.class.getName()).log(Level.SEVERE, null, ex);
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(HomeScreen.class.getName()).log(Level.SEVERE, null, ex);
         }
         
-        DefaultComboBoxModel comboMod = new DefaultComboBoxModel(getListNames().toArray());
+        DefaultComboBoxModel comboMod = new DefaultComboBoxModel(TeamManager.getTeamNames().toArray());
         TeamSheetCombo.setModel(comboMod);
-        
-        
+        TeamSelectorRes.setModel(comboMod);
+        TeamSelecterCombo.setModel(comboMod);
+        TeamSelector.setModel(comboMod);
     }
-    public ArrayList<String> getListNames() throws ClassNotFoundException, SQLException{
-        ArrayList<String> list = new ArrayList<>();
-        
-        
-        return list;
-        
-    }
-  
+   
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -126,7 +123,7 @@ public class HomeScreen extends javax.swing.JFrame {
         jLabel40 = new javax.swing.JLabel();
         jTextField11 = new javax.swing.JTextField();
         jTextField13 = new javax.swing.JTextField();
-        jTextField15 = new javax.swing.JTextField();
+        coachLable = new javax.swing.JTextField();
         jTextField16 = new javax.swing.JTextField();
         jTextField17 = new javax.swing.JTextField();
         jTextField18 = new javax.swing.JTextField();
@@ -150,7 +147,7 @@ public class HomeScreen extends javax.swing.JFrame {
         Assists = new javax.swing.JLabel();
         TeamBScoreField = new javax.swing.JLabel();
         jLabel25 = new javax.swing.JLabel();
-        jComboBox2 = new javax.swing.JComboBox<>();
+        TeamSelectorRes = new javax.swing.JComboBox<>();
         jTextField12 = new javax.swing.JTextField();
         jTextField20 = new javax.swing.JTextField();
         jTextField21 = new javax.swing.JTextField();
@@ -511,6 +508,11 @@ public class HomeScreen extends javax.swing.JFrame {
         jButton5.setBackground(new java.awt.Color(0, 51, 102));
         jButton5.setForeground(new java.awt.Color(255, 255, 255));
         jButton5.setText("Manage Team");
+        jButton5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton5ActionPerformed(evt);
+            }
+        });
 
         jButton6.setBackground(new java.awt.Color(0, 51, 102));
         jButton6.setForeground(new java.awt.Color(255, 255, 255));
@@ -533,6 +535,11 @@ public class HomeScreen extends javax.swing.JFrame {
         jToggleButton1.setBackground(new java.awt.Color(0, 51, 102));
         jToggleButton1.setForeground(new java.awt.Color(255, 255, 255));
         jToggleButton1.setText("New Team");
+        jToggleButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jToggleButton1ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
@@ -652,6 +659,11 @@ public class HomeScreen extends javax.swing.JFrame {
 
         TeamSelector.setBackground(new java.awt.Color(0, 51, 102));
         TeamSelector.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        TeamSelector.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                TeamSelectorActionPerformed(evt);
+            }
+        });
 
         jLabel44.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
         jLabel44.setForeground(new java.awt.Color(255, 255, 255));
@@ -684,7 +696,7 @@ public class HomeScreen extends javax.swing.JFrame {
                                 .addComponent(jTextField11, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addComponent(jTextField19, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(jTextField16, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jTextField15, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(coachLable, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(jPanel6Layout.createSequentialGroup()
                         .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -761,7 +773,7 @@ public class HomeScreen extends javax.swing.JFrame {
                                             .addComponent(jTextField18, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE))
                                         .addComponent(jTextField13, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE))
                                     .addGroup(jPanel6Layout.createSequentialGroup()
-                                        .addComponent(jTextField15, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(coachLable, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addGap(186, 186, 186)))
                                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel6Layout.createSequentialGroup()
@@ -770,7 +782,7 @@ public class HomeScreen extends javax.swing.JFrame {
                                     .addGroup(jPanel6Layout.createSequentialGroup()
                                         .addGap(45, 45, 45)
                                         .addComponent(jTextField19, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)))))))
-                .addContainerGap(52, Short.MAX_VALUE))
+                .addContainerGap(1231, Short.MAX_VALUE))
         );
 
         jTabbedPane4.addTab("Stats", jPanel6);
@@ -809,9 +821,14 @@ public class HomeScreen extends javax.swing.JFrame {
         TeamBScoreField.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         TeamBScoreField.setText(" ");
 
-        jComboBox2.setBackground(new java.awt.Color(0, 51, 102));
-        jComboBox2.setForeground(new java.awt.Color(255, 255, 255));
-        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        TeamSelectorRes.setBackground(new java.awt.Color(0, 51, 102));
+        TeamSelectorRes.setForeground(new java.awt.Color(255, 255, 255));
+        TeamSelectorRes.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        TeamSelectorRes.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                TeamSelectorResActionPerformed(evt);
+            }
+        });
 
         jTextField12.setText("                  ");
         jTextField12.addActionListener(new java.awt.event.ActionListener() {
@@ -1044,7 +1061,7 @@ public class HomeScreen extends javax.swing.JFrame {
                                 .addGap(422, 422, 422))))
                     .addGroup(jPanel7Layout.createSequentialGroup()
                         .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(TeamSelectorRes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel53))
                         .addGap(0, 1226, Short.MAX_VALUE))))
         );
@@ -1147,7 +1164,7 @@ public class HomeScreen extends javax.swing.JFrame {
             .addGroup(jPanel7Layout.createSequentialGroup()
                 .addComponent(jLabel53)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(TeamSelectorRes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(8, 8, 8)
                 .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 500, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -1303,6 +1320,7 @@ public class HomeScreen extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+            
 
     private void jTextField7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField7ActionPerformed
         // TODO add your handling code here:
@@ -1321,9 +1339,15 @@ public class HomeScreen extends javax.swing.JFrame {
     }//GEN-LAST:event_jTextField12ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        AddMatchResult Info = new AddMatchResult();
-        Info.setVisible(true);
-        dispose();        // TODO add your handling code here:
+        try {
+            AddMatchResult Info = new AddMatchResult();
+            Info.setVisible(true);
+            dispose();        // TODO add your handling code here:
+        } catch (SQLException ex) {
+            Logger.getLogger(HomeScreen.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(HomeScreen.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void TeamSheetComboActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TeamSheetComboActionPerformed
@@ -1391,7 +1415,16 @@ public class HomeScreen extends javax.swing.JFrame {
     }//GEN-LAST:event_jTextField4ActionPerformed
 
     private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
-        // TODO add your handling code here:
+ try {
+            PlayerManagers Info = new PlayerManagers();
+            Info.setVisible(true);
+            dispose();        // TODO add your handling code here:
+        } catch (SQLException ex) {
+            Logger.getLogger(HomeScreen.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(HomeScreen.class.getName()).log(Level.SEVERE, null, ex);
+        }        // TODO add your handling code here:
+             // TODO add your handling code here:
     }//GEN-LAST:event_jButton7ActionPerformed
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
@@ -1423,11 +1456,44 @@ public class HomeScreen extends javax.swing.JFrame {
     }//GEN-LAST:event_jTextField75ActionPerformed
 
     private void TeamSelecterComboActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TeamSelecterComboActionPerformed
-      
-        // TODO add your handling code here:
         
+         
         
     }//GEN-LAST:event_TeamSelecterComboActionPerformed
+
+    private void TeamSelectorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TeamSelectorActionPerformed
+        try {
+            String teamName = (String)TeamSelector.getSelectedItem();
+            coachLable.setText(StatsManager.getCoach(teamName));
+        } catch (SQLException ex) {
+            Logger.getLogger(HomeScreen.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(HomeScreen.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_TeamSelectorActionPerformed
+
+    private void TeamSelectorResActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TeamSelectorResActionPerformed
+      
+    }//GEN-LAST:event_TeamSelectorResActionPerformed
+
+    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+ try {
+            ManageTeams Info = new ManageTeams();
+            Info.setVisible(true);
+            dispose();        // TODO add your handling code here:
+        } catch (SQLException ex) {
+            Logger.getLogger(HomeScreen.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(HomeScreen.class.getName()).log(Level.SEVERE, null, ex);
+        }        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton5ActionPerformed
+
+    private void jToggleButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton1ActionPerformed
+        AddTeam Info = new AddTeam(); // TODO add your handling code here:
+        // TODO add your handling code here:
+        Info.setVisible(true);
+        dispose();        // TODO add your handling code here:
+    }//GEN-LAST:event_jToggleButton1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -1481,7 +1547,9 @@ public class HomeScreen extends javax.swing.JFrame {
     private javax.swing.JLabel TeamSelectedLable;
     private javax.swing.JComboBox<String> TeamSelecterCombo;
     private javax.swing.JComboBox<String> TeamSelector;
+    private javax.swing.JComboBox<String> TeamSelectorRes;
     private javax.swing.JComboBox<String> TeamSheetCombo;
+    private javax.swing.JTextField coachLable;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton5;
@@ -1489,7 +1557,6 @@ public class HomeScreen extends javax.swing.JFrame {
     private javax.swing.JButton jButton7;
     private javax.swing.JButton jButton8;
     private javax.swing.JCheckBox jCheckBox1;
-    private javax.swing.JComboBox<String> jComboBox2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
@@ -1556,7 +1623,6 @@ public class HomeScreen extends javax.swing.JFrame {
     private javax.swing.JTextField jTextField12;
     private javax.swing.JTextField jTextField13;
     private javax.swing.JTextField jTextField14;
-    private javax.swing.JTextField jTextField15;
     private javax.swing.JTextField jTextField16;
     private javax.swing.JTextField jTextField17;
     private javax.swing.JTextField jTextField18;
