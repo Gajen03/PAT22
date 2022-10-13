@@ -15,7 +15,7 @@ import java.util.Arrays;
 public class test {
     public static void main(String[] args) throws SQLException, ClassNotFoundException {
        
-  
+        System.out.println(StatsManager.getTopGoalScorer("M"));
 
         
     }
