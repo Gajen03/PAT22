@@ -4,9 +4,12 @@
  */
 package UI;
 
+import DBBackend.DB;
 import backend.PlayerManager;
 import backend.TeamManager;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.DefaultComboBoxModel;
@@ -25,6 +28,8 @@ public class ManageTeams extends javax.swing.JFrame {
         initComponents();
         DefaultComboBoxModel comboMod = new DefaultComboBoxModel(TeamManager.getTeamNames().toArray());
         teamComboBox.setModel(comboMod);
+        
+        
     }
 
     /**
@@ -39,7 +44,7 @@ public class ManageTeams extends javax.swing.JFrame {
         jPanel2 = new javax.swing.JPanel();
         jPanel27 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jList2 = new javax.swing.JList<>();
+        TeamMembersList = new javax.swing.JList<>();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -62,22 +67,32 @@ public class ManageTeams extends javax.swing.JFrame {
         jPanel27.setBackground(new java.awt.Color(0, 0, 51));
         jPanel27.setForeground(new java.awt.Color(255, 255, 255));
 
-        jList2.setBackground(new java.awt.Color(0, 51, 102));
-        jList2.setForeground(new java.awt.Color(255, 255, 255));
-        jList2.setModel(new javax.swing.AbstractListModel<String>() {
+        TeamMembersList.setBackground(new java.awt.Color(0, 51, 102));
+        TeamMembersList.setForeground(new java.awt.Color(255, 255, 255));
+        TeamMembersList.setModel(new javax.swing.AbstractListModel<String>() {
             String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
             public int getSize() { return strings.length; }
             public String getElementAt(int i) { return strings[i]; }
         });
-        jScrollPane2.setViewportView(jList2);
+        jScrollPane2.setViewportView(TeamMembersList);
 
         jButton1.setBackground(new java.awt.Color(0, 51, 102));
         jButton1.setForeground(new java.awt.Color(255, 255, 255));
         jButton1.setText(">>");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         jButton2.setBackground(new java.awt.Color(0, 51, 102));
         jButton2.setForeground(new java.awt.Color(255, 255, 255));
         jButton2.setText("<<");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         AvaliblePlyaersList.setBackground(new java.awt.Color(0, 51, 102));
         AvaliblePlyaersList.setForeground(new java.awt.Color(255, 255, 255));
@@ -286,6 +301,61 @@ public class ManageTeams extends javax.swing.JFrame {
            // TODO add your handling code here:
     }//GEN-LAST:event_jButton3ActionPerformed
 
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        try {
+            String fullname = TeamMembersList.getSelectedValue();
+            Scanner sc = new Scanner(fullname);
+            String name ="";
+            String surname ="";
+            while(sc.hasNext()){
+                name = sc.next();
+                surname = sc.next();
+            }
+            
+            DB database = new DB();
+            ResultSet getPlayerID = database.query("SELECT TeamPlayer.PlayerID FROM Players,TeamPlayers WHERE Players.Name = '"+name+"' and Players.Surname = '"+surname+"' ;");
+            String playerID = DB.toString(getPlayerID);
+            ResultSet getTeamID = database.query("SELECT TeamPlayer.TeamID FROM Players,TeamPlayers WHERE Players.Name = '"+name+"' and Players.Surname = '"+surname+"' ;");
+            String teamID = DB.toString(getTeamID);
+            
+            TeamManager.deletePlayerFromTeam(playerID, teamID);
+
+// TODO add your handling code here:
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(ManageTeams.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(ManageTeams.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+ try {
+            String fullname = AvaliblePlyaersList.getSelectedValue();
+            Scanner sc = new Scanner(fullname);
+            String name ="";
+            String surname ="";
+            while(sc.hasNext()){
+                name = sc.next();
+                surname = sc.next();
+            }
+            
+            DB database = new DB();
+            ResultSet getPlayerID = database.query("SELECT TeamPlayer.PlayerID FROM Players,TeamPlayers WHERE Players.Name = '"+name+"' and Players.Surname = '"+surname+"' ;");
+            String playerID = DB.toString(getPlayerID);
+            ResultSet getTeamID = database.query("SELECT TeamPlayer.TeamID FROM Players,TeamPlayers WHERE Players.Name = '"+name+"' and Players.Surname = '"+surname+"' ;");
+            String teamID = DB.toString(getTeamID);
+            
+            TeamManager.addPlayerToTeam(playerID, teamID);
+
+// TODO add your handling code here:
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(ManageTeams.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(ManageTeams.class.getName()).log(Level.SEVERE, null, ex);
+        }
+            // TODO add your handling code here:
+    }//GEN-LAST:event_jButton1ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -329,6 +399,7 @@ public class ManageTeams extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JList<String> AvaliblePlyaersList;
+    private javax.swing.JList<String> TeamMembersList;
     private javax.swing.JComboBox<String> ageComboBox;
     private javax.swing.JComboBox<String> genderComboBox;
     private javax.swing.JButton jButton1;
@@ -340,7 +411,6 @@ public class ManageTeams extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel22;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
-    private javax.swing.JList<String> jList2;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel27;
     private javax.swing.JPanel jPanel8;

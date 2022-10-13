@@ -86,9 +86,13 @@ public class TeamManager {
         
     }
     
-    public static void deletePlayerFromTeam(String PlayerID,String TeamID){
-        
+    public static void deletePlayerFromTeam(String PlayerID,String TeamID) throws ClassNotFoundException, SQLException{
+       DB database = new DB();
+       
+       database.update("DELETE FROM TeamPlayers WHERE TeamPlayer.PlayerID = '"+PlayerID+"' AND TeamPlayers.TeamID = '"+TeamID+"'; ");
+       
     }
+    
     
 
 

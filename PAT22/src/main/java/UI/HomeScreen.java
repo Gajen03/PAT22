@@ -33,6 +33,12 @@ public class HomeScreen extends javax.swing.JFrame {
                 initComponents();
                 
                 TGSBoys.setText(StatsManager.getTopGoalScorer("M"));
+                TGSGirls.setText(StatsManager.getTopGoalScorer("F"));
+                TABoys.setText(StatsManager.getAssister("M"));
+                TAGirls.setText(StatsManager.getAssister("F"));
+                MCBoys.setText(StatsManager.getMostCard("M"));
+                MCGirls.setText(StatsManager.getMostCard("F"));
+               
                 
                 
                 
@@ -60,6 +66,8 @@ public class HomeScreen extends javax.swing.JFrame {
    
             String teamName = (String) TeamSheetCombo.getSelectedItem();
             TeamSelectedLable.setText((String) TeamSheetCombo.getSelectedItem());
+            
+            
             String[] columnNames = TeamManager.getPlayerInfoHeaders();
             String[][] data = TeamManager.getPlayersInfoForTeam(teamName);
             DefaultTableModel dataMod = new DefaultTableModel(data, columnNames);
@@ -114,7 +122,7 @@ public class HomeScreen extends javax.swing.JFrame {
         jLabel43 = new javax.swing.JLabel();
         TAGirls = new javax.swing.JTextField();
         TABoys = new javax.swing.JTextField();
-        MCboys = new javax.swing.JTextField();
+        MCBoys = new javax.swing.JTextField();
         MCGirls = new javax.swing.JTextField();
         jPanel4 = new javax.swing.JPanel();
         jLabel9 = new javax.swing.JLabel();
@@ -255,7 +263,7 @@ public class HomeScreen extends javax.swing.JFrame {
         jTextArea1.setFont(new java.awt.Font("Dialog", 0, 15)); // NOI18N
         jTextArea1.setForeground(new java.awt.Color(255, 255, 255));
         jTextArea1.setRows(5);
-        jTextArea1.setText("\nThis app will display the scores of all football matches for the\nstudents of Reddam House Ballito to view at any \ntime and place. This application will allow you\nto input your own match statistics into the application \nsuch as, goals scored, who scored them and who was \nthe victor. You will also be allowed to add/delete\nyour own players and view the team sheets of the \ngirls and boys squad.\n\n");
+        jTextArea1.setText("\nThis app will display the scores of all football matches for the\nstudents of Reddam House Ballito to view at any \ntime and place. This application will allow you\nto input your own match statistics into the application \nsuch as, goals scored, who scored them and who was \nthe victor. You will also be allowed to add/delete\nyour own players and view and add them into different teams.\n\n");
         jScrollPane1.setViewportView(jTextArea1);
 
         jLabel1.setFont(new java.awt.Font("Dialog", 0, 28)); // NOI18N
@@ -341,12 +349,12 @@ public class HomeScreen extends javax.swing.JFrame {
             }
         });
 
-        MCboys.setBackground(new java.awt.Color(0, 0, 51));
-        MCboys.setForeground(new java.awt.Color(255, 255, 255));
-        MCboys.setText("                  ");
-        MCboys.addActionListener(new java.awt.event.ActionListener() {
+        MCBoys.setBackground(new java.awt.Color(0, 0, 51));
+        MCBoys.setForeground(new java.awt.Color(255, 255, 255));
+        MCBoys.setText("                  ");
+        MCBoys.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                MCboysActionPerformed(evt);
+                MCBoysActionPerformed(evt);
             }
         });
 
@@ -372,11 +380,12 @@ public class HomeScreen extends javax.swing.JFrame {
                         .addComponent(jLabel1)
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGap(6, 6, 6)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel4)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 412, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addGroup(jPanel3Layout.createSequentialGroup()
+                                .addGap(6, 6, 6)
+                                .addComponent(jLabel4))
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 423, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel12)
                             .addGroup(jPanel3Layout.createSequentialGroup()
@@ -408,9 +417,9 @@ public class HomeScreen extends javax.swing.JFrame {
                                             .addComponent(jLabel42))
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                            .addComponent(MCboys, javax.swing.GroupLayout.DEFAULT_SIZE, 156, Short.MAX_VALUE)
+                                            .addComponent(MCBoys, javax.swing.GroupLayout.DEFAULT_SIZE, 156, Short.MAX_VALUE)
                                             .addComponent(MCGirls))))))
-                        .addContainerGap(264, Short.MAX_VALUE))))
+                        .addContainerGap(253, Short.MAX_VALUE))))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -425,7 +434,7 @@ public class HomeScreen extends javax.swing.JFrame {
                 .addGap(49, 49, 49)
                 .addComponent(jLabel4)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel3Layout.createSequentialGroup()
@@ -447,7 +456,7 @@ public class HomeScreen extends javax.swing.JFrame {
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                         .addComponent(jLabel43))
                                     .addGroup(jPanel3Layout.createSequentialGroup()
-                                        .addComponent(MCboys, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(MCBoys, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                         .addComponent(MCGirls, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                         .addGap(67, 67, 67)
@@ -462,7 +471,7 @@ public class HomeScreen extends javax.swing.JFrame {
                                 .addComponent(TABoys, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(TAGirls, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 241, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 257, javax.swing.GroupLayout.PREFERRED_SIZE)))
         );
 
         jTabbedPane4.addTab("Home", jPanel3);
@@ -1473,17 +1482,16 @@ public class HomeScreen extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_TABoysActionPerformed
 
-    private void MCboysActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MCboysActionPerformed
+    private void MCBoysActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MCBoysActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_MCboysActionPerformed
+    }//GEN-LAST:event_MCBoysActionPerformed
 
     private void MCGirlsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MCGirlsActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_MCGirlsActionPerformed
 
     private void TeamSelecterComboActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TeamSelecterComboActionPerformed
-        
-         
+      
         
     }//GEN-LAST:event_TeamSelecterComboActionPerformed
 
@@ -1565,8 +1573,8 @@ public class HomeScreen extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel Assists;
     private javax.swing.JLabel Assists1;
+    private javax.swing.JTextField MCBoys;
     private javax.swing.JTextField MCGirls;
-    private javax.swing.JTextField MCboys;
     private javax.swing.JList<String> PlayerJList;
     private javax.swing.JTextField TABoys;
     private javax.swing.JTextField TAGirls;

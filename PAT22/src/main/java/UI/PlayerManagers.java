@@ -9,6 +9,7 @@ import backend.PlayerManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.DefaultListModel;
@@ -33,9 +34,8 @@ public class PlayerManagers extends javax.swing.JFrame {
         }
         
         PlayerList.setModel(model);
-        
-        
-        String delName = PlayerList.getSelectedValue();
+//        
+       
     }
      
 
@@ -347,12 +347,29 @@ public class PlayerManagers extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-//        String player = PlayerList.getSelectedValue();
+        try {
+            String fullname = PlayerList.getSelectedValue();
+            Scanner sc = new Scanner(fullname);
+            String name ="";
+            String surname ="";
+            while(sc.hasNext()){
+                name = sc.next();
+                surname = sc.next();
+            }
+        
+            PlayerManager.removePlayer(name, surname);
+        
+//                String player = PlayerList.getSelectedValue();
 //        String index = player.
 //        String name = player.substring(0, WIDTH);
 //        String surname = player.substring(player.length()-1,' ');
 //        System.out.println("");
-        // TODO add your handling code here:
+// TODO add your handling code here:
+        } catch (SQLException ex) {
+            Logger.getLogger(PlayerManagers.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(PlayerManagers.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_jButton2ActionPerformed
 
     /**

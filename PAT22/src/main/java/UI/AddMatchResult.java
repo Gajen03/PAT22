@@ -22,6 +22,10 @@ public class AddMatchResult extends javax.swing.JFrame {
     public AddMatchResult() throws SQLException, ClassNotFoundException {
         initComponents();
         
+        DefaultComboBoxModel comboMod = new DefaultComboBoxModel(TeamManager.getTeamNames().toArray());
+        ReddamTeamSelector.setModel(comboMod);
+        
+        
     }
 
     /**
