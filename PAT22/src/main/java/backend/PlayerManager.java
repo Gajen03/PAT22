@@ -157,4 +157,16 @@ public class PlayerManager {
         
         return players;
     }
+    
+    public static String getPlayerID(String name,String surname) throws ClassNotFoundException, SQLException{
+       DB database = new DB();
+       
+       ResultSet getPlayerID = database.query("SELECT Players.PlayerID FROM Players WHERE Players.Name = '"+name+"' AND Players.Surname = '"+surname+"' ;");
+       String playerID = DB.toString(getPlayerID);
+       return playerID;
+    }
+    
+    
+
+
 }

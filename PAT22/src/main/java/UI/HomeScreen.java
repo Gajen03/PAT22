@@ -28,9 +28,8 @@ public class HomeScreen extends javax.swing.JFrame {
      * Creates new form HomeScreen
      */
     public HomeScreen() throws ClassNotFoundException, SQLException  {
-        try {
+        initComponents();
             try {
-                initComponents();
                 
                 TGSBoys.setText(StatsManager.getTopGoalScorer("M"));
                 TGSGirls.setText(StatsManager.getTopGoalScorer("F"));
@@ -38,40 +37,18 @@ public class HomeScreen extends javax.swing.JFrame {
                 TAGirls.setText(StatsManager.getAssister("F"));
                 MCBoys.setText(StatsManager.getMostCard("M"));
                 MCGirls.setText(StatsManager.getMostCard("F"));
-               
+
+                DefaultComboBoxModel comboMod = new DefaultComboBoxModel(TeamManager.getTeamNames().toArray());
+                TeamSheetCombo.setModel(comboMod);
+                TeamSelectorRes.setModel(comboMod);
+                TeamSelector.setModel(comboMod);
                 
                 
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                String team = (String)TeamSelecterCombo.getSelectedItem();
-                
-                DefaultListModel<String> list = new DefaultListModel();
-                PlayerJList.setListData(PlayerManager.getAllPlayers());
       
-            } catch (SQLException ex) {
-                Logger.getLogger(HomeScreen.class.getName()).log(Level.SEVERE, null, ex);
-            } catch (ClassNotFoundException ex) {
-                Logger.getLogger(HomeScreen.class.getName()).log(Level.SEVERE, null, ex);
-            }
    
-            String teamName = (String) TeamSheetCombo.getSelectedItem();
-            TeamSelectedLable.setText((String) TeamSheetCombo.getSelectedItem());
+                updateListCurrentTeam();
+                updateTableCurrentTeam();
             
-            
-            String[] columnNames = TeamManager.getPlayerInfoHeaders();
-            String[][] data = TeamManager.getPlayersInfoForTeam(teamName);
-            DefaultTableModel dataMod = new DefaultTableModel(data, columnNames);
-            playersTable.setModel(dataMod);
             
         } catch (SQLException ex) {
             Logger.getLogger(HomeScreen.class.getName()).log(Level.SEVERE, null, ex);
@@ -79,13 +56,34 @@ public class HomeScreen extends javax.swing.JFrame {
             Logger.getLogger(HomeScreen.class.getName()).log(Level.SEVERE, null, ex);
         }
         
-        DefaultComboBoxModel comboMod = new DefaultComboBoxModel(TeamManager.getTeamNames().toArray());
-        TeamSheetCombo.setModel(comboMod);
-        TeamSelectorRes.setModel(comboMod);
-        TeamSelecterCombo.setModel(comboMod);
-        TeamSelector.setModel(comboMod);
+        
     }
    
+    
+    private void updateTableCurrentTeam() throws SQLException, ClassNotFoundException{
+        String teamName = (String) TeamSheetCombo.getSelectedItem();
+            TeamSelectedLable.setText((String) TeamSheetCombo.getSelectedItem());
+            
+            
+            String[] columnNames = TeamManager.getPlayerInfoHeaders();
+            String[][] data = TeamManager.getPlayersInfoForTeam(teamName);
+            DefaultTableModel dataMod = new DefaultTableModel(data, columnNames);
+            playersTable.setModel(dataMod);
+    }
+    
+    private void updateListCurrentTeam() throws SQLException, ClassNotFoundException{
+    
+                
+                DefaultListModel<String> list = new DefaultListModel();
+                String [] names = PlayerManager.getAllPlayers();
+                for (int i = 0; i < names.length; i++) {
+                    list.addElement(names[i]);
+                    
+                }
+                PlayerJList.setModel(list);
+    }
+    
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -157,31 +155,6 @@ public class HomeScreen extends javax.swing.JFrame {
         jLabel44 = new javax.swing.JLabel();
         jLabel45 = new javax.swing.JLabel();
         jLabel51 = new javax.swing.JLabel();
-        jPanel5 = new javax.swing.JPanel();
-        jScrollPane13 = new javax.swing.JScrollPane();
-        PlayerJList = new javax.swing.JList<>();
-        jLabel15 = new javax.swing.JLabel();
-        jLabel16 = new javax.swing.JLabel();
-        jLabel17 = new javax.swing.JLabel();
-        jLabel18 = new javax.swing.JLabel();
-        jTextField3 = new javax.swing.JTextField();
-        jTextField4 = new javax.swing.JTextField();
-        jTextField5 = new javax.swing.JTextField();
-        TeamSelecterCombo = new javax.swing.JComboBox<>();
-        jLabel33 = new javax.swing.JLabel();
-        jLabel19 = new javax.swing.JLabel();
-        jLabel34 = new javax.swing.JLabel();
-        jLabel36 = new javax.swing.JLabel();
-        jLabel37 = new javax.swing.JLabel();
-        jLabel38 = new javax.swing.JLabel();
-        jLabel39 = new javax.swing.JLabel();
-        jTextField6 = new javax.swing.JTextField();
-        jTextField7 = new javax.swing.JTextField();
-        jTextField8 = new javax.swing.JTextField();
-        jLabel46 = new javax.swing.JLabel();
-        jLabel52 = new javax.swing.JLabel();
-        jLabel47 = new javax.swing.JLabel();
-        jButton7 = new javax.swing.JButton();
         jPanel7 = new javax.swing.JPanel();
         jLabel14 = new javax.swing.JLabel();
         jScrollPane6 = new javax.swing.JScrollPane();
@@ -230,6 +203,29 @@ public class HomeScreen extends javax.swing.JFrame {
         jTextField72 = new javax.swing.JTextField();
         jTextField73 = new javax.swing.JTextField();
         TeamBScoreField1 = new javax.swing.JLabel();
+        jPanel5 = new javax.swing.JPanel();
+        jScrollPane13 = new javax.swing.JScrollPane();
+        PlayerJList = new javax.swing.JList<>();
+        jLabel15 = new javax.swing.JLabel();
+        jLabel16 = new javax.swing.JLabel();
+        jLabel17 = new javax.swing.JLabel();
+        jLabel18 = new javax.swing.JLabel();
+        jTextField3 = new javax.swing.JTextField();
+        jTextField4 = new javax.swing.JTextField();
+        jTextField5 = new javax.swing.JTextField();
+        jLabel33 = new javax.swing.JLabel();
+        jLabel19 = new javax.swing.JLabel();
+        jLabel34 = new javax.swing.JLabel();
+        jLabel36 = new javax.swing.JLabel();
+        jLabel37 = new javax.swing.JLabel();
+        jLabel38 = new javax.swing.JLabel();
+        jLabel39 = new javax.swing.JLabel();
+        jTextField6 = new javax.swing.JTextField();
+        jTextField7 = new javax.swing.JTextField();
+        jTextField8 = new javax.swing.JTextField();
+        jLabel46 = new javax.swing.JLabel();
+        jLabel47 = new javax.swing.JLabel();
+        jButton7 = new javax.swing.JButton();
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -586,14 +582,15 @@ public class HomeScreen extends javax.swing.JFrame {
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 1152, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(jPanel4Layout.createSequentialGroup()
                                 .addGap(465, 465, 465)
-                                .addComponent(jLabel9))
+                                .addComponent(jLabel9)
+                                .addGap(294, 294, 294))
                             .addGroup(jPanel4Layout.createSequentialGroup()
                                 .addComponent(jLabel50)
-                                .addGap(463, 463, 463)
-                                .addComponent(TeamSelectedLable, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(TeamSelectedLable, javax.swing.GroupLayout.PREFERRED_SIZE, 526, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel4Layout.createSequentialGroup()
                                 .addGap(159, 159, 159)
@@ -822,141 +819,6 @@ public class HomeScreen extends javax.swing.JFrame {
         );
 
         jTabbedPane4.addTab("Stats", jPanel6);
-
-        jPanel5.setBackground(new java.awt.Color(0, 0, 51));
-        jPanel5.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        PlayerJList.setBackground(new java.awt.Color(0, 51, 102));
-        PlayerJList.setForeground(new java.awt.Color(255, 255, 255));
-        jScrollPane13.setViewportView(PlayerJList);
-
-        jPanel5.add(jScrollPane13, new org.netbeans.lib.awtextra.AbsoluteConstraints(22, 45, 251, 498));
-
-        jLabel15.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
-        jLabel15.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel15.setText("Stats");
-        jPanel5.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 140, -1, -1));
-
-        jLabel16.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
-        jLabel16.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel16.setText("Goals");
-        jPanel5.add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 200, -1, -1));
-
-        jLabel17.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
-        jLabel17.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel17.setText("Assists");
-        jPanel5.add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 260, -1, -1));
-
-        jLabel18.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
-        jLabel18.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel18.setText("Red/Yellow Cards: ");
-        jPanel5.add(jLabel18, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 310, -1, -1));
-
-        jTextField3.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
-        jTextField3.setText(" ");
-        jTextField3.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField3ActionPerformed(evt);
-            }
-        });
-        jPanel5.add(jTextField3, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 200, 72, -1));
-
-        jTextField4.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
-        jTextField4.setText(" ");
-        jTextField4.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField4ActionPerformed(evt);
-            }
-        });
-        jPanel5.add(jTextField4, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 260, 72, -1));
-
-        jTextField5.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
-        jTextField5.setText(" ");
-        jPanel5.add(jTextField5, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 310, 72, -1));
-
-        TeamSelecterCombo.setBackground(new java.awt.Color(0, 51, 102));
-        TeamSelecterCombo.setForeground(new java.awt.Color(255, 255, 255));
-        TeamSelecterCombo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        TeamSelecterCombo.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                TeamSelecterComboActionPerformed(evt);
-            }
-        });
-        jPanel5.add(TeamSelecterCombo, new org.netbeans.lib.awtextra.AbsoluteConstraints(22, 20, -1, -1));
-
-        jLabel33.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
-        jLabel33.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel33.setText("OVR: ");
-        jPanel5.add(jLabel33, new org.netbeans.lib.awtextra.AbsoluteConstraints(309, 40, -1, -1));
-
-        jLabel19.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
-        jPanel5.add(jLabel19, new org.netbeans.lib.awtextra.AbsoluteConstraints(362, 36, -1, -1));
-        jPanel5.add(jLabel34, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 97, -1, -1));
-
-        jLabel36.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
-        jLabel36.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel36.setText("Name:");
-        jPanel5.add(jLabel36, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 260, -1, -1));
-
-        jLabel37.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
-        jLabel37.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel37.setText("Surname:");
-        jPanel5.add(jLabel37, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 280, -1, -1));
-
-        jLabel38.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
-        jLabel38.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel38.setText("Date of birth:");
-        jPanel5.add(jLabel38, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 300, -1, -1));
-
-        jLabel39.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
-        jLabel39.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel39.setText("Nationality:");
-        jPanel5.add(jLabel39, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 340, -1, -1));
-
-        jTextField6.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
-        jTextField6.setText(" ");
-        jTextField6.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField6ActionPerformed(evt);
-            }
-        });
-        jPanel5.add(jTextField6, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 260, 101, -1));
-
-        jTextField7.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
-        jTextField7.setText(" ");
-        jTextField7.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField7ActionPerformed(evt);
-            }
-        });
-        jPanel5.add(jTextField7, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 280, 101, -1));
-
-        jTextField8.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
-        jTextField8.setText(" ");
-        jPanel5.add(jTextField8, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 300, 101, -1));
-        jPanel5.add(jLabel46, new org.netbeans.lib.awtextra.AbsoluteConstraints(114, 20, -1, -1));
-
-        jLabel52.setFont(new java.awt.Font("Dialog", 0, 10)); // NOI18N
-        jLabel52.setText("Select Team to view");
-        jPanel5.add(jLabel52, new org.netbeans.lib.awtextra.AbsoluteConstraints(22, 0, -1, -1));
-
-        jLabel47.setBackground(new java.awt.Color(0, 0, 51));
-        jLabel47.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
-        jLabel47.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel47.setText(" ");
-        jPanel5.add(jLabel47, new org.netbeans.lib.awtextra.AbsoluteConstraints(353, 36, 52, -1));
-
-        jButton7.setBackground(new java.awt.Color(0, 51, 102));
-        jButton7.setForeground(new java.awt.Color(255, 255, 255));
-        jButton7.setText("Manage Players");
-        jButton7.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton7ActionPerformed(evt);
-            }
-        });
-        jPanel5.add(jButton7, new org.netbeans.lib.awtextra.AbsoluteConstraints(830, 40, -1, -1));
-
-        jTabbedPane4.addTab("Players", jPanel5);
 
         jPanel7.setBackground(new java.awt.Color(0, 0, 51));
 
@@ -1342,6 +1204,127 @@ public class HomeScreen extends javax.swing.JFrame {
 
         jTabbedPane4.addTab("Results", jPanel7);
 
+        jPanel5.setBackground(new java.awt.Color(0, 0, 51));
+        jPanel5.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        PlayerJList.setBackground(new java.awt.Color(0, 51, 102));
+        PlayerJList.setForeground(new java.awt.Color(255, 255, 255));
+        jScrollPane13.setViewportView(PlayerJList);
+
+        jPanel5.add(jScrollPane13, new org.netbeans.lib.awtextra.AbsoluteConstraints(22, 45, 251, 498));
+
+        jLabel15.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
+        jLabel15.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel15.setText("Stats");
+        jPanel5.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 140, -1, -1));
+
+        jLabel16.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+        jLabel16.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel16.setText("Goals");
+        jPanel5.add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 200, -1, -1));
+
+        jLabel17.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+        jLabel17.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel17.setText("Assists");
+        jPanel5.add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 260, -1, -1));
+
+        jLabel18.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+        jLabel18.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel18.setText("Red/Yellow Cards: ");
+        jPanel5.add(jLabel18, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 310, -1, -1));
+
+        jTextField3.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
+        jTextField3.setText(" ");
+        jTextField3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField3ActionPerformed(evt);
+            }
+        });
+        jPanel5.add(jTextField3, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 200, 72, -1));
+
+        jTextField4.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
+        jTextField4.setText(" ");
+        jTextField4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField4ActionPerformed(evt);
+            }
+        });
+        jPanel5.add(jTextField4, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 260, 72, -1));
+
+        jTextField5.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
+        jTextField5.setText(" ");
+        jPanel5.add(jTextField5, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 310, 72, -1));
+
+        jLabel33.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        jLabel33.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel33.setText("OVR: ");
+        jPanel5.add(jLabel33, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 140, -1, -1));
+
+        jLabel19.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
+        jPanel5.add(jLabel19, new org.netbeans.lib.awtextra.AbsoluteConstraints(362, 36, -1, -1));
+        jPanel5.add(jLabel34, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 97, -1, -1));
+
+        jLabel36.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+        jLabel36.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel36.setText("Name:");
+        jPanel5.add(jLabel36, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 260, -1, -1));
+
+        jLabel37.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+        jLabel37.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel37.setText("Surname:");
+        jPanel5.add(jLabel37, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 280, -1, -1));
+
+        jLabel38.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+        jLabel38.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel38.setText("Date of birth:");
+        jPanel5.add(jLabel38, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 300, -1, -1));
+
+        jLabel39.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+        jLabel39.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel39.setText("Nationality:");
+        jPanel5.add(jLabel39, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 340, -1, -1));
+
+        jTextField6.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
+        jTextField6.setText(" ");
+        jTextField6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField6ActionPerformed(evt);
+            }
+        });
+        jPanel5.add(jTextField6, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 260, 101, -1));
+
+        jTextField7.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
+        jTextField7.setText(" ");
+        jTextField7.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField7ActionPerformed(evt);
+            }
+        });
+        jPanel5.add(jTextField7, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 280, 101, -1));
+
+        jTextField8.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
+        jTextField8.setText(" ");
+        jPanel5.add(jTextField8, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 300, 101, -1));
+        jPanel5.add(jLabel46, new org.netbeans.lib.awtextra.AbsoluteConstraints(114, 20, -1, -1));
+
+        jLabel47.setBackground(new java.awt.Color(0, 0, 51));
+        jLabel47.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        jLabel47.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel47.setText(" ");
+        jPanel5.add(jLabel47, new org.netbeans.lib.awtextra.AbsoluteConstraints(353, 36, 52, -1));
+
+        jButton7.setBackground(new java.awt.Color(0, 51, 102));
+        jButton7.setForeground(new java.awt.Color(255, 255, 255));
+        jButton7.setText("Manage Players");
+        jButton7.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton7ActionPerformed(evt);
+            }
+        });
+        jPanel5.add(jButton7, new org.netbeans.lib.awtextra.AbsoluteConstraints(830, 40, -1, -1));
+
+        jTabbedPane4.addTab("Players", jPanel5);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -1386,7 +1369,13 @@ public class HomeScreen extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void TeamSheetComboActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TeamSheetComboActionPerformed
-      
+        try {
+            updateTableCurrentTeam();
+        } catch (SQLException ex) {
+            Logger.getLogger(HomeScreen.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(HomeScreen.class.getName()).log(Level.SEVERE, null, ex);
+        }
         
        
     }//GEN-LAST:event_TeamSheetComboActionPerformed
@@ -1490,11 +1479,6 @@ public class HomeScreen extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_MCGirlsActionPerformed
 
-    private void TeamSelecterComboActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TeamSelecterComboActionPerformed
-      
-        
-    }//GEN-LAST:event_TeamSelecterComboActionPerformed
-
     private void TeamSelectorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TeamSelectorActionPerformed
         try {
             String teamName = (String)TeamSelector.getSelectedItem();
@@ -1585,7 +1569,6 @@ public class HomeScreen extends javax.swing.JFrame {
     private javax.swing.JLabel TeamBScoreField;
     private javax.swing.JLabel TeamBScoreField1;
     private javax.swing.JLabel TeamSelectedLable;
-    private javax.swing.JComboBox<String> TeamSelecterCombo;
     private javax.swing.JComboBox<String> TeamSelector;
     private javax.swing.JComboBox<String> TeamSelectorRes;
     private javax.swing.JComboBox<String> TeamSheetCombo;
@@ -1639,7 +1622,6 @@ public class HomeScreen extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel50;
     private javax.swing.JLabel jLabel51;
-    private javax.swing.JLabel jLabel52;
     private javax.swing.JLabel jLabel53;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;

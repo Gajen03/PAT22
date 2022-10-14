@@ -356,9 +356,16 @@ public class PlayerManagers extends javax.swing.JFrame {
                 name = sc.next();
                 surname = sc.next();
             }
-        
+            
             PlayerManager.removePlayer(name, surname);
+        String [] names = PlayerManager.getAllPlayers();
+        DefaultListModel model = new DefaultListModel();
+        for (int i = 0; i < names.length; i++) {
+            model.addElement(names[i]);
+            
+        }
         
+        PlayerList.setModel(model);
 //                String player = PlayerList.getSelectedValue();
 //        String index = player.
 //        String name = player.substring(0, WIDTH);
