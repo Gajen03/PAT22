@@ -13,6 +13,7 @@ import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.DefaultListModel;
 
 /**
  *
@@ -28,9 +29,23 @@ public class ManageTeams extends javax.swing.JFrame {
         initComponents();
         DefaultComboBoxModel comboMod = new DefaultComboBoxModel(TeamManager.getTeamNames().toArray());
         teamComboBox.setModel(comboMod);
-        
+        updateListCurrentTeam();
         
     }
+      private void updateListCurrentTeam() throws SQLException, ClassNotFoundException{
+    
+                String teamName = (String)teamComboBox.getSelectedItem();
+                String teamID = TeamManager.getTeamID(teamName);
+
+                DefaultListModel<String> list = new DefaultListModel();
+                String [] names = TeamManager.getTeamPlayerName(teamID);
+                for (int i = 0; i < names.length; i++) {
+                    list.addElement(names[i]);
+                    
+                }
+                TeamMembersList.setModel(list);
+    }
+
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -284,8 +299,14 @@ public class ManageTeams extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void teamComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_teamComboBoxActionPerformed
-
-        // TODO add your handling code here:
+        try {
+            updateListCurrentTeam();
+            // TODO add your handling code here:
+        } catch (SQLException ex) {
+            Logger.getLogger(ManageTeams.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(ManageTeams.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_teamComboBoxActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
@@ -313,9 +334,9 @@ public class ManageTeams extends javax.swing.JFrame {
             }
             
             DB database = new DB();
-            ResultSet getPlayerID = database.query("SELECT TeamPlayer.PlayerID FROM Players,TeamPlayers WHERE Players.Name = '"+name+"' and Players.Surname = '"+surname+"' ;");
+            ResultSet getPlayerID = database.query("SELECT TeamPlayer.PlayerID FROM Players,TeamPlayer WHERE Players.Name = '"+name+"' and Players.Surname = '"+surname+"' ;");
             String playerID = DB.toString(getPlayerID);
-            ResultSet getTeamID = database.query("SELECT TeamPlayer.TeamID FROM Players,TeamPlayers WHERE Players.Name = '"+name+"' and Players.Surname = '"+surname+"' ;");
+            ResultSet getTeamID = database.query("SELECT TeamPlayer.TeamID FROM Players,TeamPlayer WHERE Players.Name = '"+name+"' and Players.Surname = '"+surname+"' ;");
             String teamID = DB.toString(getTeamID);
             
             TeamManager.deletePlayerFromTeam(playerID, teamID);

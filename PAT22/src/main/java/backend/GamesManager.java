@@ -30,14 +30,53 @@ public class GamesManager {
     
     public static String getGoalsScored(String gameID ) throws  ClassNotFoundException, SQLException{
         DB database = new DB();
-        ResultSet getGoals = database.query("SELECT SUM(Goals) FROM Players,Games,Stats WHERE Stats.PlayerID = Player.PlayerID AND Stats.GameID = '"+gameID+"';");
+        ResultSet getGoals = database.query("SELECT SUM(Goals) FROM Stats,Players,Game WHERE Stats.PlayerID = Players.PlayerID AND Stats.GameID = '"+gameID+"' AND Game.GameID = '"+gameID+"';");
         return DB.toString(getGoals);
     }
     
+    public static void addGame(String location,String RHbTeam,String OpponentTeam) throws ClassNotFoundException, SQLException{
+        DB database = new DB();
+        ResultSet addGame = database.query("INSERT INTO Game(Location,TeamA,TeamB) VALUES('"+location+"','"+RHbTeam+"','"+OpponentTeam+"')");
+    }
+    
+    
+    
+    
+    
+    
+    
     public static String getGoalsScorers(String gameID ) throws  ClassNotFoundException, SQLException{
         DB database = new DB();
-        ResultSet getScorers = database.query("");
-        // please figure this out future gajen
+        ResultSet getScorers = database.query("SELECT Players.Name,Players.Surname FROM Stats,Players,Game WHERE Stats.PlayerID = Players.PlayerID AND Stats.GameID = '"+gameID+"'  AND Game.GameID = '"+gameID+"'  AND Stats.Goals > 0;");
+        return DB.toString(getScorers);
+    }
+    
+    
+    public static String getAssists(String gameID ) throws  ClassNotFoundException, SQLException{
+        DB database = new DB();
+        ResultSet getAssists = database.query("SELECT SUM(Assists) FROM Stats,Players,Game WHERE Stats.PlayerID = Players.PlayerID AND Stats.GameID = '"+gameID+"' AND Game.GameID = '"+gameID+"';");
+        return DB.toString(getAssists);
+    }
+    
+    public static String getAssisters(String gameID ) throws  ClassNotFoundException, SQLException{
+        DB database = new DB();
+        ResultSet getAssister = database.query("SELECT Players.Name,Players.Surname FROM Stats,Players,Game WHERE Stats.PlayerID = Players.PlayerID AND Stats.GameID = '"+gameID+"'  AND Game.GameID = '"+gameID+"'  AND Stats.Assists > 0;");
+        return DB.toString(getAssister);
+    }
+    
+    
+    
+    // double check these
+    public static String getCards(String gameID ) throws  ClassNotFoundException, SQLException{
+        DB database = new DB();
+        ResultSet getCards = database.query("SELECT SUM(Cards) FROM Stats,Players,Game WHERE Stats.PlayerID = Players.PlayerID AND Stats.GameID = '"+gameID+"' AND Game.GameID = '"+gameID+"';");
+        return DB.toString(getCards);
+    }
+    
+    public static String getNamesCards(String gameID ) throws  ClassNotFoundException, SQLException{
+        DB database = new DB();
+        ResultSet getNamesCards= database.query("SELECT Players.Name,Players.Surname FROM Stats,Players,Game WHERE Stats.PlayerID = Players.PlayerID AND Stats.GameID = '"+gameID+"'  AND Game.GameID = '"+gameID+"'  AND Stats.Cards > 0;");
+        return DB.toString(getNamesCards);
     }
 
 

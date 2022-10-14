@@ -37,8 +37,7 @@ public class PlayerManagers extends javax.swing.JFrame {
 //        
        
     }
-     
-
+      
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
