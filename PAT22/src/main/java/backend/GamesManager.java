@@ -69,8 +69,6 @@ public class GamesManager {
         ResultSet getScorers = database.query("SELECT Players.Name,Players.Surname FROM Stats,Players,Game WHERE Stats.PlayerID = Players.PlayerID AND Stats.GameID = '"+gameID+"'  AND Game.GameID = '"+gameID+"'  AND Stats.Goals > 0;");
         return DB.toString(getScorers);
     }
-    
-    
     public static String getAssists(String gameID ) throws  ClassNotFoundException, SQLException{
         DB database = new DB();
         ResultSet getAssists = database.query("SELECT SUM(Assists) FROM Stats,Players,Game WHERE Stats.PlayerID = Players.PlayerID AND Stats.GameID = '"+gameID+"' AND Game.GameID = '"+gameID+"';");
@@ -83,9 +81,6 @@ public class GamesManager {
         return DB.toString(getAssister);
     }
     
-    
-    
-    // double check these
     public static String getCards(String gameID ) throws  ClassNotFoundException, SQLException{
         DB database = new DB();
         ResultSet getCards = database.query("SELECT SUM(Cards) FROM Stats,Players,Game WHERE Stats.PlayerID = Players.PlayerID AND Stats.GameID = '"+gameID+"' AND Game.GameID = '"+gameID+"';");
