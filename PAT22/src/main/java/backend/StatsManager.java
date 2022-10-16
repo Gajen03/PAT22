@@ -21,6 +21,9 @@ public class StatsManager {
         return DB.toString(getCoachNameQuery);
         
     }
+     
+     // They dont work the correct way
+     
     public static String getTopGoalScorer(String gender) throws ClassNotFoundException, SQLException{
         DB database = new DB();
         ResultSet getTopGoalScorer = database.query("SELECT Players.Name,Players.Surname,Stats.Goals FROM Players,Stats WHERE Players.PlayerID = Stats.PlayerID AND gender = '"+gender+"' ORDER BY Goals DESC LIMIT 1 ;");
@@ -36,5 +39,6 @@ public class StatsManager {
         ResultSet getMostCard = database.query("SELECT Players.Name,Players.Surname,Stats.Cards FROM Players,Stats WHERE Players.PlayerID = Stats.PlayerID AND gender = '"+gender+"' ORDER BY Cards DESC LIMIT 1 ;");
         return DB.toString(getMostCard);
     }
+    
     
 }

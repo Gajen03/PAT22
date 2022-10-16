@@ -4,20 +4,25 @@
  */
 package backend;
 
+import DBBackend.DB;
+import java.sql.Array;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Scanner;
 
 /**
  *
  * @author Gajendran
  */
 public class test {
-    public static void main(String[] args) throws SQLException, ClassNotFoundException {
-       
-        System.out.println(TeamManager.getTeamPlayerName("1"));
-
+    public static void main(String[] args) throws ClassNotFoundException, SQLException {
         
+        System.out.println(PlayerManager.getPlayerID("Megan", "Loud"));
     }
-   
+    
+    
+
+
 }

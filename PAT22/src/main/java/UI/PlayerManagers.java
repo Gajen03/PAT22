@@ -25,8 +25,12 @@ public class PlayerManagers extends javax.swing.JFrame {
      */
     public PlayerManagers() throws SQLException, ClassNotFoundException {
         initComponents();
-        
-        String [] names = PlayerManager.getAllPlayers();
+        updatePlayers();
+//        
+       
+    }
+     private void updatePlayers() throws SQLException, ClassNotFoundException{
+         String [] names = PlayerManager.getAllPlayers();
         DefaultListModel model = new DefaultListModel();
         for (int i = 0; i < names.length; i++) {
             model.addElement(names[i]);
@@ -34,10 +38,7 @@ public class PlayerManagers extends javax.swing.JFrame {
         }
         
         PlayerList.setModel(model);
-//        
-       
-    }
-      
+     }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -69,10 +70,10 @@ public class PlayerManagers extends javax.swing.JFrame {
         jLabel10 = new javax.swing.JLabel();
         plaeyrmanagerErrorLable = new javax.swing.JLabel();
         addedlable = new javax.swing.JLabel();
-        dateofbirthfield = new javax.swing.JTextField();
         plaeyrmanagerErrorLable1 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
         genderBox = new javax.swing.JComboBox<>();
+        ageCombo = new javax.swing.JSpinner();
 
         jLabel11.setText("jLabel11");
 
@@ -160,10 +161,6 @@ public class PlayerManagers extends javax.swing.JFrame {
         addedlable.setForeground(new java.awt.Color(0, 204, 51));
         addedlable.setText(" ");
 
-        dateofbirthfield.setBackground(new java.awt.Color(0, 0, 51));
-        dateofbirthfield.setForeground(new java.awt.Color(255, 255, 255));
-        dateofbirthfield.setText("DD/MM/YYYY");
-
         plaeyrmanagerErrorLable1.setForeground(new java.awt.Color(255, 0, 0));
         plaeyrmanagerErrorLable1.setText(" ");
 
@@ -229,10 +226,10 @@ public class PlayerManagers extends javax.swing.JFrame {
                                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                             .addComponent(nameField)
                                             .addComponent(surnameField)
-                                            .addComponent(positionCombo, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                            .addComponent(dateofbirthfield, javax.swing.GroupLayout.DEFAULT_SIZE, 297, Short.MAX_VALUE)
+                                            .addComponent(positionCombo, 0, 297, Short.MAX_VALUE)
                                             .addComponent(genderBox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                            .addComponent(kitnumberSpinner))
+                                            .addComponent(kitnumberSpinner)
+                                            .addComponent(ageCombo))
                                         .addContainerGap())))))))
         );
         jPanel1Layout.setVerticalGroup(
@@ -256,9 +253,9 @@ public class PlayerManagers extends javax.swing.JFrame {
                             .addComponent(jLabel4))
                         .addGap(27, 27, 27)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(dateofbirthfield, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel5))
-                        .addGap(27, 27, 27)
+                            .addComponent(jLabel5)
+                            .addComponent(ageCombo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(26, 26, 26)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(positionCombo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel6))
@@ -326,7 +323,7 @@ public class PlayerManagers extends javax.swing.JFrame {
         try {
             String name = nameField.getText();
             String surname = surnameField.getText();
-            String age =  dateofbirthfield.getText();
+            int age =  (int)ageCombo.getValue();
             String position = (String)positionCombo.getSelectedItem();
             int kitnumber = (int) kitnumberSpinner.getValue();
             String gender = (String)genderBox.getSelectedItem();
@@ -335,6 +332,7 @@ public class PlayerManagers extends javax.swing.JFrame {
             // TODO add your handling code here:
             addedlable.setText("PLAYER ADDED");
             plaeyrmanagerErrorLable.setText(" ");
+            updatePlayers();
         } catch (SQLException ex) {
             Logger.getLogger(PlayerManagers.class.getName()).log(Level.SEVERE, null, ex);
             plaeyrmanagerErrorLable.setText("kit number already exists");
@@ -357,6 +355,7 @@ public class PlayerManagers extends javax.swing.JFrame {
             }
             
             PlayerManager.removePlayer(name, surname);
+            
         String [] names = PlayerManager.getAllPlayers();
         DefaultListModel model = new DefaultListModel();
         for (int i = 0; i < names.length; i++) {
@@ -422,7 +421,7 @@ public class PlayerManagers extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JList<String> PlayerList;
     private javax.swing.JLabel addedlable;
-    private javax.swing.JTextField dateofbirthfield;
+    private javax.swing.JSpinner ageCombo;
     private javax.swing.JComboBox<String> genderBox;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;

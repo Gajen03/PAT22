@@ -27,16 +27,30 @@ public class ManageTeams extends javax.swing.JFrame {
     public ManageTeams() throws SQLException, ClassNotFoundException {
 
         initComponents();
-        DefaultComboBoxModel comboMod = new DefaultComboBoxModel(TeamManager.getTeamNames().toArray());
+        DefaultComboBoxModel comboMod = new DefaultComboBoxModel(TeamManager.getRHBTeamNames().toArray());
         teamComboBox.setModel(comboMod);
+        updateListCurrentAvaPlayers();
         updateListCurrentTeam();
         
     }
-      private void updateListCurrentTeam() throws SQLException, ClassNotFoundException{
+      private void updateListCurrentAvaPlayers() throws SQLException, ClassNotFoundException{
     
                 String teamName = (String)teamComboBox.getSelectedItem();
-                String teamID = TeamManager.getTeamID(teamName);
-
+                String teamIDStr = TeamManager.getTeamID(teamName);
+                char teamID = teamIDStr.charAt(1);
+                DefaultListModel<String> list = new DefaultListModel();
+                String [] names = PlayerManager.getAvaliblePlayers(teamID);
+                for (int i = 0; i < names.length; i++) {
+                    list.addElement(names[i]);
+                    
+                }
+                AvaliblePlyaersList.setModel(list);
+    }
+       private void updateListCurrentTeam() throws SQLException, ClassNotFoundException{
+    
+                String teamName = (String)teamComboBox.getSelectedItem();
+                String teamIDStr = TeamManager.getTeamID(teamName);
+                char teamID = teamIDStr.charAt(1);
                 DefaultListModel<String> list = new DefaultListModel();
                 String [] names = TeamManager.getTeamPlayerName(teamID);
                 for (int i = 0; i < names.length; i++) {
@@ -300,6 +314,7 @@ public class ManageTeams extends javax.swing.JFrame {
 
     private void teamComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_teamComboBoxActionPerformed
         try {
+            updateListCurrentAvaPlayers();
             updateListCurrentTeam();
             // TODO add your handling code here:
         } catch (SQLException ex) {
@@ -351,6 +366,9 @@ public class ManageTeams extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
  try {
+            String teamName = (String)teamComboBox.getSelectedItem();
+            String teamIDStr= TeamManager.getTeamID(teamName);
+            char teamID = teamIDStr.charAt(1);
             String fullname = AvaliblePlyaersList.getSelectedValue();
             Scanner sc = new Scanner(fullname);
             String name ="";
@@ -361,10 +379,10 @@ public class ManageTeams extends javax.swing.JFrame {
             }
             
             DB database = new DB();
-            ResultSet getPlayerID = database.query("SELECT TeamPlayer.PlayerID FROM Players,TeamPlayers WHERE Players.Name = '"+name+"' and Players.Surname = '"+surname+"' ;");
-            String playerID = DB.toString(getPlayerID);
-            ResultSet getTeamID = database.query("SELECT TeamPlayer.TeamID FROM Players,TeamPlayers WHERE Players.Name = '"+name+"' and Players.Surname = '"+surname+"' ;");
-            String teamID = DB.toString(getTeamID);
+            ResultSet getPlayerID = database.query("SELECT Players.PlayerID FROM Players WHERE Players.Name = '"+name+"' and Players.Surname = '"+surname+"' ;");
+            String playerIDStr = DB.toString(getPlayerID);
+            char playerID = playerIDStr.charAt(1);
+            
             
             TeamManager.addPlayerToTeam(playerID, teamID);
 
