@@ -45,8 +45,7 @@ public class PlayerManager {
         
         while (dbData.next()) {
             players[count] = dbData.getString("Name") + " " + dbData.getString("Surname");
-          
-
+            
             count++;
         }
       
@@ -59,7 +58,12 @@ public class PlayerManager {
        
        ResultSet getPlayerID = database.query("SELECT Players.PlayerID FROM Players WHERE Players.Name = '"+name+"' AND Players.Surname = '"+surname+"' ;");
        String playerID = DB.toString(getPlayerID).replace("#","");
+       if(playerID.equals("")){
+           return "0";
+       }else{
        return playerID;
+           
+       }
     }
     
     public static String getPlayerGoals(char playerID) throws ClassNotFoundException, SQLException{
@@ -116,14 +120,14 @@ public class PlayerManager {
         rs.next();
         int numRowsRS = rs.getInt(1);
         
-        ResultSet dbData = database.query("SELECT Players.Name , Players.Surname  FROM TeamPlayer,Players WHERE TeamPlayer.TeamID = '"+teamID+"' AND TeamPlayer.PlayerID = Players.PlayerID;");
+        ResultSet dbData = database.query("SELECT Players.Name , Players.Surname,Players.Gender  FROM TeamPlayer,Players WHERE TeamPlayer.TeamID = '"+teamID+"' AND TeamPlayer.PlayerID = Players.PlayerID;");
         String[] teamPlayers = new String[numRowsRS];
         int count = 0;
 
       
         
         while (dbData.next()) {
-            teamPlayers[count] = dbData.getString("Name") + " " + dbData.getString("Surname");
+            teamPlayers[count] = dbData.getString("Name") + " " + dbData.getString("Surname")+ " (" + dbData.getString("Gender")+")";
             
 
             count++;
@@ -157,12 +161,12 @@ public class PlayerManager {
         avaliblePlayersRS.next();
         int numRows = avaliblePlayersRS.getInt(1);
         
-        ResultSet dbData = database.query("SELECT Players.Name,Players.Surname FROM Players "+query+" Players.Name = Players.Name;");
+        ResultSet dbData = database.query("SELECT Players.Name,Players.Surname,Players.Gender FROM Players "+query+" Players.Name = Players.Name;");
         String[] avaliblePlayers = new String[numRows];
         int count =0;
         
         while(dbData.next()){           
-            avaliblePlayers[count] = dbData.getString("Name") + " " + dbData.getString("Surname");
+            avaliblePlayers[count] = dbData.getString("Name") + " " + dbData.getString("Surname") + " (" + dbData.getString("Gender")+")";
 
             count++;
         }

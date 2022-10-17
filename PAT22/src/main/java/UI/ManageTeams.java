@@ -277,6 +277,9 @@ public class ManageTeams extends javax.swing.JFrame {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         try {
+             String teamName = (String)teamComboBox.getSelectedItem();
+            String teamIDStr= TeamManager.getTeamID(teamName);
+            char teamID = teamIDStr.charAt(1);
             String fullname = TeamMembersList.getSelectedValue();
             Scanner sc = new Scanner(fullname);
             String name ="";
@@ -287,10 +290,9 @@ public class ManageTeams extends javax.swing.JFrame {
             }
             
             DB database = new DB();
-            ResultSet getPlayerID = database.query("SELECT TeamPlayer.PlayerID FROM Players,TeamPlayer WHERE Players.Name = '"+name+"' and Players.Surname = '"+surname+"' ;");
-            String playerID = DB.toString(getPlayerID);
-            ResultSet getTeamID = database.query("SELECT TeamPlayer.TeamID FROM Players,TeamPlayer WHERE Players.Name = '"+name+"' and Players.Surname = '"+surname+"' ;");
-            String teamID = DB.toString(getTeamID);
+            ResultSet getPlayerID = database.query("SELECT Players.PlayerID FROM Players WHERE Players.Name = '"+name+"' and Players.Surname = '"+surname+"' ;");
+            String playerIDStr = DB.toString(getPlayerID);
+            char playerID = playerIDStr.charAt(1);
             
             TeamManager.deletePlayerFromTeam(playerID, teamID);
 

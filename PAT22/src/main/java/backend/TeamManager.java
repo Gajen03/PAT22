@@ -118,7 +118,7 @@ public class TeamManager {
         
     }
     
-    public static void deletePlayerFromTeam(String PlayerID,String TeamID) throws ClassNotFoundException, SQLException{
+    public static void deletePlayerFromTeam(char PlayerID,char TeamID) throws ClassNotFoundException, SQLException{
        DB database = new DB();
        
        database.update("DELETE FROM TeamPlayer WHERE TeamPlayer.PlayerID = '"+PlayerID+"' AND TeamPlayer.TeamID = '"+TeamID+"'; ");
@@ -129,7 +129,11 @@ public class TeamManager {
         ResultSet getTeamId = database.query("SELECT TeamID FROM Teams WHERE Teams.Name = '"+teamName+"' ;");
         return DB.toString(getTeamId);
     }
-    
+    public static String getTeamName(char teamID) throws ClassNotFoundException, SQLException{
+        DB database = new DB();
+        ResultSet getTeamId = database.query("SELECT Teams.Name FROM Teams WHERE Teams.TeamID = '"+teamID+"' ;");
+        return DB.toString(getTeamId);
+    }
     
 
 

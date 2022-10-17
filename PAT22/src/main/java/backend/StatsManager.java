@@ -18,7 +18,7 @@ public class StatsManager {
         DB database = new DB();
         ResultSet getCoachNameQuery = database.query("SELECT Coach FROM Teams WHERE Teams.Name = '"+teamName+"';");
 
-        return DB.toString(getCoachNameQuery);
+        return DB.toString(getCoachNameQuery).replace("#", " ");
         
     }
      
@@ -27,17 +27,17 @@ public class StatsManager {
     public static String getTopGoalScorer(String gender) throws ClassNotFoundException, SQLException{
         DB database = new DB();
         ResultSet getTopGoalScorer = database.query("SELECT Players.Name,Players.Surname,Stats.Goals FROM Players,Stats WHERE Players.PlayerID = Stats.PlayerID AND gender = '"+gender+"' ORDER BY Goals DESC LIMIT 1 ;");
-        return DB.toString(getTopGoalScorer);
+        return DB.toString(getTopGoalScorer).replace("#", " ");
     }
     public static String getAssister(String gender) throws ClassNotFoundException, SQLException{
         DB database = new DB();
         ResultSet getTopAssister = database.query("SELECT Players.Name,Players.Surname,Stats.Assists FROM Players,Stats WHERE Players.PlayerID = Stats.PlayerID AND gender = '"+gender+"' ORDER BY Assists DESC LIMIT 1 ;");
-        return DB.toString(getTopAssister);
+        return DB.toString(getTopAssister).replace("#", " ");
     }
     public static String getMostCard(String gender) throws ClassNotFoundException, SQLException{
         DB database = new DB();
         ResultSet getMostCard = database.query("SELECT Players.Name,Players.Surname,Stats.Cards FROM Players,Stats WHERE Players.PlayerID = Stats.PlayerID AND gender = '"+gender+"' ORDER BY Cards DESC LIMIT 1 ;");
-        return DB.toString(getMostCard);
+        return DB.toString(getMostCard).replace("#", " ");
     }
     
     

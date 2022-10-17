@@ -5,6 +5,7 @@
 package UI;
 
 import DBBackend.DB;
+import backend.GamesManager;
 import backend.PlayerManager;
 import backend.StatsManager;
 import backend.TeamManager;
@@ -49,6 +50,7 @@ public class HomeScreen extends javax.swing.JFrame {
    
                 updateListCurrentTeam();
                 updateTableCurrentTeam();
+                updateResults();
                 String teamName = (String)TeamSelector.getSelectedItem();
             TeamSelectedLableStas.setText(teamName);
             
@@ -83,7 +85,19 @@ public class HomeScreen extends javax.swing.JFrame {
                     
                 }
                 PlayerJList.setModel(list);
-    }
+    }private void updateResults() throws SQLException, ClassNotFoundException{
+        String teamName = (String) TeamSelectorRes.getSelectedItem();
+        String teamIDStr = TeamManager.getTeamID(teamName).replace("#", "");
+        char teamID = teamIDStr.charAt(1);
+        String [] results = GamesManager.populateTeamList(teamID);
+        DefaultListModel model = new DefaultListModel();
+        for (int i = 0; i < results.length; i++) {
+            model.addElement(results[i]);
+            
+        }
+        
+        resultsList.setModel(model);
+     }
     
     
 
@@ -161,7 +175,7 @@ public class HomeScreen extends javax.swing.JFrame {
         jPanel7 = new javax.swing.JPanel();
         jLabel14 = new javax.swing.JLabel();
         jScrollPane6 = new javax.swing.JScrollPane();
-        jList2 = new javax.swing.JList<>();
+        resultsList = new javax.swing.JList<>();
         jButton2 = new javax.swing.JButton();
         TeamBField = new javax.swing.JTextField();
         TeamAField = new javax.swing.JTextField();
@@ -825,9 +839,9 @@ public class HomeScreen extends javax.swing.JFrame {
         jLabel14.setForeground(new java.awt.Color(255, 255, 255));
         jLabel14.setText("Results");
 
-        jList2.setBackground(new java.awt.Color(0, 51, 102));
-        jList2.setForeground(new java.awt.Color(255, 255, 255));
-        jScrollPane6.setViewportView(jList2);
+        resultsList.setBackground(new java.awt.Color(0, 51, 102));
+        resultsList.setForeground(new java.awt.Color(255, 255, 255));
+        jScrollPane6.setViewportView(resultsList);
 
         jButton2.setBackground(new java.awt.Color(0, 51, 102));
         jButton2.setForeground(new java.awt.Color(255, 255, 255));
@@ -1473,7 +1487,13 @@ public class HomeScreen extends javax.swing.JFrame {
     }//GEN-LAST:event_TeamSelectorActionPerformed
 
     private void TeamSelectorResActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TeamSelectorResActionPerformed
-      
+        try {      
+            updateResults();
+        } catch (SQLException ex) {
+            Logger.getLogger(HomeScreen.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(HomeScreen.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_TeamSelectorResActionPerformed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
@@ -1634,7 +1654,6 @@ public class HomeScreen extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
-    private javax.swing.JList<String> jList2;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
@@ -1691,6 +1710,7 @@ public class HomeScreen extends javax.swing.JFrame {
     private javax.swing.JLabel ovrField;
     private javax.swing.JTable playersTable;
     private javax.swing.JTextField positon;
+    private javax.swing.JList<String> resultsList;
     private javax.swing.JLabel teamOutPut;
     private javax.swing.JButton viewButton;
     // End of variables declaration//GEN-END:variables

@@ -19,7 +19,7 @@ import java.util.Scanner;
 public class test {
     public static void main(String[] args) throws ClassNotFoundException, SQLException {
         
-        System.out.println(PlayerManager.getPlayerID("Megan", "Loud"));
+        System.out.println(GamesManager.getGameID("1", "4"));
     }
     
     

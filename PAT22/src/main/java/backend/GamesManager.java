@@ -33,28 +33,30 @@ public class GamesManager {
         DB database = new DB();
         database.update("INSERT INTO Game(Location,TeamA,TeamB) VALUES('"+location+"','"+RHbTeam+"','"+OpponentTeam+"');");
     }
-    public static void addGameGoals(char gameID,String playerID,int goals) throws ClassNotFoundException, SQLException{
+    public static void addGameGoals(String gameID,String playerID,int goals) throws ClassNotFoundException, SQLException{
         DB database = new DB();
         database.update("INSERT INTO Stats(Stats.GameID,Stats.PlayerID,Goals) VALUES('"+gameID+"','"+playerID+"','"+goals+"');");
 
     }
-    public static void addGameAssists(char gameID,String playerID,int assists) throws ClassNotFoundException, SQLException{
+    public static void addGameAssists(String gameID,String playerID,int assists) throws ClassNotFoundException, SQLException{
         DB database = new DB();
         database.update("INSERT INTO Stats(Stats.GameID,Stats.PlayerID,Assists) VALUES('"+gameID+"','"+playerID+"','"+assists+"') ;");
 
     }
-    public static void addGameCards(char gameID,String playerID,char cards) throws ClassNotFoundException, SQLException{
+    public static void addGameCards(String gameID,String playerID,char cards) throws ClassNotFoundException, SQLException{
         DB database = new DB();
         database.update("INSERT INTO Stats(Stats.GameID,Stats.PlayerID,Cards) VALUES('"+gameID+"','"+playerID+"','"+cards+"');");
 
     }
     
     
-    public static char getGameID(String teamAID,String teamBID ) throws ClassNotFoundException, SQLException{
+    
+    public static String getGameID(String teamAID,String teamBID ) throws ClassNotFoundException, SQLException{
         DB database = new DB();
         ResultSet getGameIDRS = database.query("SELECT Game.GameID FROM Game WHERE TeamA = '"+teamAID+"' AND TeamB = '"+teamBID+"'");
-        String getGameIDStr = DB.toString(getGameIDRS).replace("#", "");
-        char getGameID = getGameIDStr.charAt(getGameIDStr.length()-1);
+        String getGameIDStr = DB.toString(getGameIDRS).replace("#", " ").replace("\n","#");
+        String getGameID = getGameIDStr.substring(getGameIDStr.lastIndexOf(" ")).replace("#", "").replace(" ", "");
+        
         return getGameID;
     }
     
@@ -91,6 +93,25 @@ public class GamesManager {
         DB database = new DB();
         ResultSet getNamesCards= database.query("SELECT Players.Name,Players.Surname FROM Stats,Players,Game WHERE Stats.PlayerID = Players.PlayerID AND Stats.GameID = '"+gameID+"'  AND Game.GameID = '"+gameID+"'  AND Stats.Cards > 0;");
         return DB.toString(getNamesCards);
+    }
+    
+    public static String[] populateTeamList(char teamID) throws ClassNotFoundException, SQLException{
+        DB database = new DB();
+        ResultSet getCount = database.query("SELECT COUNT(*)  FROM Game WHERE TeamA = '"+teamID+"'");
+        int numRows = getCount.getInt(1);
+        
+        ResultSet getTeamB = database.query("SELECT Teams.Name FROM Game,Teams WHERE TeamA = 1 AND Teams.TeamID = TeamB ;");
+    
+        
+        String[] results = new String[numRows];
+        int count = 0;
+        
+        while(getTeamB.next()){
+            results[count] = TeamManager.getTeamName(teamID)+" vs "+getTeamB.getString("Name");
+            count++;
+        }
+        
+        return results;
     }
 
 
