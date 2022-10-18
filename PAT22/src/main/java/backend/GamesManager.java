@@ -28,22 +28,29 @@ public class GamesManager {
         return DB.toString(getOponentName);
     }
     
-    public static void addGame(String location,String RHbTeam,String OpponentTeam) throws ClassNotFoundException, SQLException{
+    public static int addGame(String location,String RHbTeam,String OpponentTeam) throws ClassNotFoundException, SQLException{
     
         DB database = new DB();
         database.update("INSERT INTO Game(Location,TeamA,TeamB) VALUES('"+location+"','"+RHbTeam+"','"+OpponentTeam+"');");
+        
+        
+        ResultSet getgameIDRS = database.query("SELECT Game.GameID FROM Game  ORDER BY GameID DESC LIMIT 1;");
+        getgameIDRS.next();
+        int gameID = getgameIDRS.getInt("GameID");
+        return gameID;
     }
-    public static void addGameGoals(String gameID,String playerID,int goals) throws ClassNotFoundException, SQLException{
+    public static void addGameGoals(int gameID,String playerID,int goals) throws ClassNotFoundException, SQLException{
         DB database = new DB();
         database.update("INSERT INTO Stats(Stats.GameID,Stats.PlayerID,Goals) VALUES('"+gameID+"','"+playerID+"','"+goals+"');");
-
+        
+        
     }
-    public static void addGameAssists(String gameID,String playerID,int assists) throws ClassNotFoundException, SQLException{
+    public static void addGameAssists(int gameID,String playerID,int assists) throws ClassNotFoundException, SQLException{
         DB database = new DB();
         database.update("INSERT INTO Stats(Stats.GameID,Stats.PlayerID,Assists) VALUES('"+gameID+"','"+playerID+"','"+assists+"') ;");
 
     }
-    public static void addGameCards(String gameID,String playerID,char cards) throws ClassNotFoundException, SQLException{
+    public static void addGameCards(int gameID,String playerID,char cards) throws ClassNotFoundException, SQLException{
         DB database = new DB();
         database.update("INSERT INTO Stats(Stats.GameID,Stats.PlayerID,Cards) VALUES('"+gameID+"','"+playerID+"','"+cards+"');");
 
@@ -51,14 +58,14 @@ public class GamesManager {
     
     
     
-    public static String getGameID(String teamAID,String teamBID ) throws ClassNotFoundException, SQLException{
-        DB database = new DB();
-        ResultSet getGameIDRS = database.query("SELECT Game.GameID FROM Game WHERE TeamA = '"+teamAID+"' AND TeamB = '"+teamBID+"'");
-        String getGameIDStr = DB.toString(getGameIDRS).replace("#", " ").replace("\n","#");
-        String getGameID = getGameIDStr.substring(getGameIDStr.lastIndexOf(" ")).replace("#", "").replace(" ", "");
-        
-        return getGameID;
-    }
+//    public static String getGameID(String teamAID,String teamBID ) throws ClassNotFoundException, SQLException{
+//        DB database = new DB();
+//        ResultSet getGameIDRS = database.query("SELECT Game.GameID FROM Game WHERE TeamA = '"+teamAID+"' AND TeamB = '"+teamBID+"'");
+//        String getGameIDStr = DB.toString(getGameIDRS).replace("#", " ").replace("\n","#");
+//        String getGameID = getGameIDStr.substring(getGameIDStr.lastIndexOf(" ")).replace("#", "").replace(" ", "");
+//        
+//        return getGameID;
+//    }
     
     public static String getGoalsScored(String gameID ) throws  ClassNotFoundException, SQLException{
         DB database = new DB();
@@ -95,6 +102,8 @@ public class GamesManager {
         return DB.toString(getNamesCards);
     }
     
+    
+    /////////////////////////////////////////////////////////////////////////////////////////////////////
     public static String[] populateTeamList(char teamID) throws ClassNotFoundException, SQLException{
         DB database = new DB();
         ResultSet getCount = database.query("SELECT COUNT(*)  FROM Game WHERE TeamA = '"+teamID+"'");

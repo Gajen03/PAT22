@@ -24,110 +24,110 @@ public class AddMatchResult extends javax.swing.JFrame {
      */
     public AddMatchResult() throws SQLException, ClassNotFoundException {
         initComponents();
-        
+
         DefaultComboBoxModel comboMod = new DefaultComboBoxModel(TeamManager.getRHBTeamNames().toArray());
         ReddamTeamSelector.setModel(comboMod);
         DefaultComboBoxModel opComboMod = new DefaultComboBoxModel(TeamManager.getOpponentTeamNames().toArray());
         OpponentComboBox.setModel(opComboMod);
-        
+
     }
-    private void updatePlayerCombo() throws ClassNotFoundException, SQLException{
-         
-        String teamName = (String)ReddamTeamSelector.getSelectedItem();
+
+    private void updatePlayerCombo() throws ClassNotFoundException, SQLException {
+
+        String teamName = (String) ReddamTeamSelector.getSelectedItem();
         String teamIDStr = TeamManager.getTeamID(teamName);
         char teamID = teamIDStr.charAt(1);
-        
-        
-         DefaultComboBoxModel players1= new DefaultComboBoxModel();
-         DefaultComboBoxModel players2= new DefaultComboBoxModel();
-         DefaultComboBoxModel players3= new DefaultComboBoxModel();
-         DefaultComboBoxModel players4= new DefaultComboBoxModel();
-         DefaultComboBoxModel players5= new DefaultComboBoxModel();
-         DefaultComboBoxModel players6= new DefaultComboBoxModel();
-         DefaultComboBoxModel players7= new DefaultComboBoxModel();
-         DefaultComboBoxModel players8= new DefaultComboBoxModel();
-         DefaultComboBoxModel players9= new DefaultComboBoxModel();
-         DefaultComboBoxModel players10= new DefaultComboBoxModel();
-         DefaultComboBoxModel players11= new DefaultComboBoxModel();
-         DefaultComboBoxModel players12= new DefaultComboBoxModel();
-         DefaultComboBoxModel players13= new DefaultComboBoxModel();
-         DefaultComboBoxModel players14= new DefaultComboBoxModel();
-         DefaultComboBoxModel players15= new DefaultComboBoxModel();
-         players1.addElement("");
-         players2.addElement("");
-         players3.addElement("");
-         players4.addElement("");
-         players5.addElement("");
-         players6.addElement("");
-         players7.addElement("");
-         players8.addElement("");
-         players9.addElement("");
-         players10.addElement("");
-         players11.addElement("");
-         players12.addElement("");
-         players13.addElement("");
-         players14.addElement("");
-         players15.addElement("");
-                
-                String [] names = TeamManager.getTeamPlayerName(teamID);
-                for (int i = 0; i < names.length; i++) {
-                    players1.addElement(names[i]);
-                    players2.addElement(names[i]);
-                    players3.addElement(names[i]);
-                    players4.addElement(names[i]);
-                    players5.addElement(names[i]);
-                    players6.addElement(names[i]);
-                    players7.addElement(names[i]);
-                    players8.addElement(names[i]);
-                    players9.addElement(names[i]);
-                    players10.addElement(names[i]);
-                    players11.addElement(names[i]);
-                    players12.addElement(names[i]);
-                    players13.addElement(names[i]);
-                    players14.addElement(names[i]);
-                    players15.addElement(names[i]);
 
-                    
-                }
-                PlayersWhosScored1.setModel(players1);
-                PlayersWhosScored2.setModel(players2);
-                PlayersWhosScored3.setModel(players3);
-                PlayersWhosScored4.setModel(players4);
-                PlayersWhosScored5.setModel(players5);
-                
-                playersWhoAssisted1.setModel(players6);
-                playersWhoAssisted2.setModel(players7);
-                playersWhoAssisted3.setModel(players8);
-                playersWhoAssisted4.setModel(players9);
-                playersWhoAssisted5.setModel(players10);
-                
-                playersWithCards1.setModel(players11);
-                playersWithCards2.setModel(players12);
-                playersWithCards3.setModel(players13);
-                playersWithCards4.setModel(players14);
-                playersWithCards5.setModel(players15);
+        DefaultComboBoxModel players1 = new DefaultComboBoxModel();
+        DefaultComboBoxModel players2 = new DefaultComboBoxModel();
+        DefaultComboBoxModel players3 = new DefaultComboBoxModel();
+        DefaultComboBoxModel players4 = new DefaultComboBoxModel();
+        DefaultComboBoxModel players5 = new DefaultComboBoxModel();
+        DefaultComboBoxModel players6 = new DefaultComboBoxModel();
+        DefaultComboBoxModel players7 = new DefaultComboBoxModel();
+        DefaultComboBoxModel players8 = new DefaultComboBoxModel();
+        DefaultComboBoxModel players9 = new DefaultComboBoxModel();
+        DefaultComboBoxModel players10 = new DefaultComboBoxModel();
+        DefaultComboBoxModel players11 = new DefaultComboBoxModel();
+        DefaultComboBoxModel players12 = new DefaultComboBoxModel();
+        DefaultComboBoxModel players13 = new DefaultComboBoxModel();
+        DefaultComboBoxModel players14 = new DefaultComboBoxModel();
+        DefaultComboBoxModel players15 = new DefaultComboBoxModel();
+        players1.addElement("");
+        players2.addElement("");
+        players3.addElement("");
+        players4.addElement("");
+        players5.addElement("");
+        players6.addElement("");
+        players7.addElement("");
+        players8.addElement("");
+        players9.addElement("");
+        players10.addElement("");
+        players11.addElement("");
+        players12.addElement("");
+        players13.addElement("");
+        players14.addElement("");
+        players15.addElement("");
+
+        String[] names = TeamManager.getTeamPlayerName(teamID);
+        for (int i = 0; i < names.length; i++) {
+            players1.addElement(names[i]);
+            players2.addElement(names[i]);
+            players3.addElement(names[i]);
+            players4.addElement(names[i]);
+            players5.addElement(names[i]);
+            players6.addElement(names[i]);
+            players7.addElement(names[i]);
+            players8.addElement(names[i]);
+            players9.addElement(names[i]);
+            players10.addElement(names[i]);
+            players11.addElement(names[i]);
+            players12.addElement(names[i]);
+            players13.addElement(names[i]);
+            players14.addElement(names[i]);
+            players15.addElement(names[i]);
+
+        }
+        PlayersWhosScored1.setModel(players1);
+        PlayersWhosScored2.setModel(players2);
+        PlayersWhosScored3.setModel(players3);
+        PlayersWhosScored4.setModel(players4);
+        PlayersWhosScored5.setModel(players5);
+
+        playersWhoAssisted1.setModel(players6);
+        playersWhoAssisted2.setModel(players7);
+        playersWhoAssisted3.setModel(players8);
+        playersWhoAssisted4.setModel(players9);
+        playersWhoAssisted5.setModel(players10);
+
+        playersWithCards1.setModel(players11);
+        playersWithCards2.setModel(players12);
+        playersWithCards3.setModel(players13);
+        playersWithCards4.setModel(players14);
+        playersWithCards5.setModel(players15);
     }
-        private String getName(String fullname){
-            Scanner sc = new Scanner(fullname);
-            String name ="";
-            String surname ="";
-            while(sc.hasNext()){
-                name = sc.next();
-                surname = sc.next();
-            }
-            return name;
+
+    private String getName(String fullname) {
+        Scanner sc = new Scanner(fullname);
+        String name = "";
+        String surname = "";
+        while (sc.hasNext()) {
+            name = sc.next();
+            surname = sc.next();
         }
-        
-        private String getSurname(String fullname){
-            Scanner sc = new Scanner(fullname);
-            String name ="";
-            String surname ="";
-            while(sc.hasNext()){
-                name = sc.next();
-                surname = sc.next();
-            }
-            return surname;
+        return name;
+    }
+
+    private String getSurname(String fullname) {
+        Scanner sc = new Scanner(fullname);
+        String name = "";
+        String surname = "";
+        while (sc.hasNext()) {
+            name = sc.next();
+            surname = sc.next();
         }
+        return surname;
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -605,100 +605,118 @@ public class AddMatchResult extends javax.swing.JFrame {
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         try {
             String location = (String) locationCombo.getSelectedItem();
-            String RHBTeam = (String)ReddamTeamSelector.getSelectedItem();
+            String RHBTeam = (String) ReddamTeamSelector.getSelectedItem();
             String teamAID = TeamManager.getTeamID(RHBTeam).replace("#", "").replace("\n", "");
-            String OpponentTeam = (String)OpponentComboBox.getSelectedItem();
-            String teamBID = TeamManager.getTeamID(OpponentTeam).replace("#", "").replace("\n","");
-            GamesManager.addGame(location, teamAID, teamBID);
-            String gameID = GamesManager.getGameID(teamAID, teamBID);
+            String OpponentTeam = (String) OpponentComboBox.getSelectedItem();
+            String teamBID = TeamManager.getTeamID(OpponentTeam).replace("#", "").replace("\n", "");
+            int gameID = GamesManager.addGame(location, teamAID, teamBID);
             
+
+            //GOALS
+            String fullnameGoal1 = (String) PlayersWhosScored1.getSelectedItem();
+            if (fullnameGoal1 != null) {
+                String playerGoalID1Str = PlayerManager.getPlayerID(getName(fullnameGoal1), getSurname(fullnameGoal1)).replace("#", "");
+                int goal1 = (int) goals1.getValue();
+                GamesManager.addGameGoals(gameID, playerGoalID1Str, goal1);
+            }
+
+            String fullnameGoal2 = (String) PlayersWhosScored2.getSelectedItem();
+            if (fullnameGoal2 != null) {
+            String playerGoalID2 = PlayerManager.getPlayerID(getName(fullnameGoal2), getSurname(fullnameGoal2)).replace("#", "");
+            int goal2 = (int) goals2.getValue();
+            GamesManager.addGameGoals(gameID, playerGoalID2, goal2);
+            }
             
+            String fullnameGoal3 = (String) PlayersWhosScored3.getSelectedItem();
+            if (fullnameGoal3 != null) {
+            String playerGoalID3 = PlayerManager.getPlayerID(getName(fullnameGoal3), getSurname(fullnameGoal3)).replace("#", "");
+            int goal3 = (int) goals3.getValue();
+            GamesManager.addGameGoals(gameID, playerGoalID3, goal3);
+            }
             
-         //GOALS
-            String fullnameGoal1 = (String)PlayersWhosScored1.getSelectedItem();
-            String playerGoalID1Str = PlayerManager.getPlayerID(getName(fullnameGoal1), getSurname(fullnameGoal1)).replace("#","");
-            int goal1 = (int)goals1.getValue();
-            GamesManager.addGameGoals(gameID,playerGoalID1Str, goal1);
+            String fullnameGoal4 = (String) PlayersWhosScored4.getSelectedItem();
+            if (fullnameGoal4 != null) {
+            String playerGoalID4 = PlayerManager.getPlayerID(getName(fullnameGoal4), getSurname(fullnameGoal4)).replace("#", "");
+            int goal4 = (int) goals4.getValue();
+            GamesManager.addGameGoals(gameID, playerGoalID4, goal4);
+            }
             
-            String fullnameGoal2 = (String)PlayersWhosScored2.getSelectedItem();
-            String playerGoalID2 = PlayerManager.getPlayerID(getName(fullnameGoal2), getSurname(fullnameGoal2)).replace("#","");
-            int goal2 = (int)goals2.getValue();
-            GamesManager.addGameGoals(gameID,playerGoalID2, goal2);
+            String fullnameGoal5 = (String) PlayersWhosScored5.getSelectedItem();
+            if (fullnameGoal5 != null) {
+            String playerGoalID5 = PlayerManager.getPlayerID(getName(fullnameGoal5), getSurname(fullnameGoal5)).replace("#", "");
+            int goal5 = (int) goals5.getValue();
+            GamesManager.addGameGoals(gameID, playerGoalID5, goal5);
+            }
+            //ASSISTS
+            String fullnameAssist1 = (String) playersWhoAssisted1.getSelectedItem();
+            if (fullnameAssist1 != null) {
+            String playerAssistID1Str = PlayerManager.getPlayerID(getName(fullnameAssist1), getSurname(fullnameAssist1)).replace("#", "");
+            int assist1 = (int) this.assist1.getValue();
+            GamesManager.addGameAssists(gameID, playerAssistID1Str, assist1);
+            }
             
-            String fullnameGoal3 = (String)PlayersWhosScored3.getSelectedItem();
-            String playerGoalID3 = PlayerManager.getPlayerID(getName(fullnameGoal3), getSurname(fullnameGoal3)).replace("#","");
-            int goal3 = (int)goals3.getValue();
-            GamesManager.addGameGoals(gameID,playerGoalID3, goal3);
+            String fullnameAssist2 = (String) playersWhoAssisted2.getSelectedItem();
+            if (fullnameAssist2 != null) {
+            String playerAssistID2Str = PlayerManager.getPlayerID(getName(fullnameAssist2), getSurname(fullnameAssist2)).replace("#", "");
+            int assist2 = (int) this.assist2.getValue();
+            GamesManager.addGameAssists(gameID, playerAssistID2Str, assist2);
+            }
             
-            String fullnameGoal4 = (String)PlayersWhosScored4.getSelectedItem();
-            String playerGoalID4= PlayerManager.getPlayerID(getName(fullnameGoal4), getSurname(fullnameGoal4)).replace("#","");
-            int goal4 = (int)goals4.getValue();
-            GamesManager.addGameGoals(gameID,playerGoalID4, goal4);
+            String fullnameAssist3 = (String) playersWhoAssisted3.getSelectedItem();
+            if (fullnameAssist3 != null) {
+            String playerAssistID3Str = PlayerManager.getPlayerID(getName(fullnameAssist3), getSurname(fullnameAssist3)).replace("#", "");
+            int assist3 = (int) this.assist3.getValue();
+            GamesManager.addGameAssists(gameID, playerAssistID3Str, assist3);
+            }
             
-            String fullnameGoal5 = (String)PlayersWhosScored5.getSelectedItem();
-            String playerGoalID5 = PlayerManager.getPlayerID(getName(fullnameGoal5), getSurname(fullnameGoal5)).replace("#","");
-            int goal5 = (int)goals5.getValue();
-            GamesManager.addGameGoals(gameID,playerGoalID5, goal5);
+            String fullnameAssist4 = (String) playersWhoAssisted4.getSelectedItem();
+            if (fullnameAssist4 != null) {
+            String playerAssistID4Str = PlayerManager.getPlayerID(getName(fullnameAssist4), getSurname(fullnameAssist4)).replace("#", "");
+            int assist4 = (int) this.assist4.getValue();
+            GamesManager.addGameAssists(gameID, playerAssistID4Str, assist4);
+            }
             
-            
-            
-         //ASSISTS
-            String fullnameAssist1 = (String)playersWhoAssisted1.getSelectedItem();
-            String playerAssistID1Str = PlayerManager.getPlayerID(getName(fullnameAssist1), getSurname(fullnameAssist1)).replace("#","");
-            int assist1 = (int)this.assist1.getValue();
-            GamesManager.addGameAssists(gameID,playerAssistID1Str, assist1);
-            
-            String fullnameAssist2 = (String)playersWhoAssisted2.getSelectedItem();
-            String playerAssistID2Str = PlayerManager.getPlayerID(getName(fullnameAssist2), getSurname(fullnameAssist2)).replace("#","");
-            int assist2 = (int)this.assist2.getValue();
-            GamesManager.addGameAssists(gameID,playerAssistID2Str, assist2);
-            
-            String fullnameAssist3 = (String)playersWhoAssisted3.getSelectedItem();
-            String playerAssistID3Str = PlayerManager.getPlayerID(getName(fullnameAssist3), getSurname(fullnameAssist3)).replace("#","");
-            int assist3 = (int)this.assist3.getValue();
-            GamesManager.addGameAssists(gameID,playerAssistID3Str, assist3);
-            
-            String fullnameAssist4 = (String)playersWhoAssisted4.getSelectedItem();
-            String playerAssistID4Str = PlayerManager.getPlayerID(getName(fullnameAssist4), getSurname(fullnameAssist4)).replace("#","");
-            int assist4 = (int)this.assist4.getValue();
-            GamesManager.addGameAssists(gameID,playerAssistID4Str, assist4);
-            
-            String fullnameAssist5 = (String)playersWhoAssisted5.getSelectedItem();
-            String playerAssistID5Str = PlayerManager.getPlayerID(getName(fullnameAssist5), getSurname(fullnameAssist5)).replace("#","");
-            int assist5 = (int)this.assist5.getValue();
-            GamesManager.addGameAssists(gameID,playerAssistID5Str, assist5);
-            
-            
-            
+            String fullnameAssist5 = (String) playersWhoAssisted5.getSelectedItem();
+            if (fullnameAssist5 != null) {
+            String playerAssistID5Str = PlayerManager.getPlayerID(getName(fullnameAssist5), getSurname(fullnameAssist5)).replace("#", "");
+            int assist5 = (int) this.assist5.getValue();
+            GamesManager.addGameAssists(gameID, playerAssistID5Str, assist5);
+            }
             //CARDS
-            String fullnameCard1 = (String)playersWithCards1.getSelectedItem();
-            String playerCards1Str = PlayerManager.getPlayerID(getName(fullnameCard1), getSurname(fullnameCard1)).replace("#","");
-            char card1 = (char)this.card1.getSelectedItem();
-            GamesManager.addGameCards(gameID,playerCards1Str, card1);
+            String fullnameCard1 = (String) playersWithCards1.getSelectedItem();
+            if (fullnameCard1 != null) {
+            String playerCards1Str = PlayerManager.getPlayerID(getName(fullnameCard1), getSurname(fullnameCard1)).replace("#", "");
+            char card1 = (char) this.card1.getSelectedItem();
+            GamesManager.addGameCards(gameID, playerCards1Str, card1);
+            }
             
-            String fullnameCard2 = (String)playersWithCards2.getSelectedItem();
-            String playerCards2Str = PlayerManager.getPlayerID(getName(fullnameCard2), getSurname(fullnameCard2)).replace("#","");
-            char card2 = (char)this.card2.getSelectedItem();
-            GamesManager.addGameCards(gameID,playerCards2Str, card2);
+            String fullnameCard2 = (String) playersWithCards2.getSelectedItem();
+            if (fullnameCard2 != null) {
+            String playerCards2Str = PlayerManager.getPlayerID(getName(fullnameCard2), getSurname(fullnameCard2)).replace("#", "");
+            char card2 = (char) this.card2.getSelectedItem();
+            GamesManager.addGameCards(gameID, playerCards2Str, card2);
+            }
             
-            String fullnameCard3 = (String)playersWithCards3.getSelectedItem();
-            String playerCards3Str = PlayerManager.getPlayerID(getName(fullnameCard3), getSurname(fullnameCard3)).replace("#","");
-            char card3 = (char)this.card3.getSelectedItem();
-            GamesManager.addGameCards(gameID,playerCards3Str, card3);
+            String fullnameCard3 = (String) playersWithCards3.getSelectedItem();
+            if (fullnameCard3 != null) {
+            String playerCards3Str = PlayerManager.getPlayerID(getName(fullnameCard3), getSurname(fullnameCard3)).replace("#", "");
+            char card3 = (char) this.card3.getSelectedItem();
+            GamesManager.addGameCards(gameID, playerCards3Str, card3);
+            }
             
-            String fullnameCard4 = (String)playersWithCards4.getSelectedItem();
-            String playerCards4Str = PlayerManager.getPlayerID(getName(fullnameCard4), getSurname(fullnameCard4)).replace("#","");
-            char card4 = (char)this.card4.getSelectedItem();
-            GamesManager.addGameCards(gameID,playerCards4Str, card4);
+            String fullnameCard4 = (String) playersWithCards4.getSelectedItem();
+            if (fullnameCard4 != null) {
+            String playerCards4Str = PlayerManager.getPlayerID(getName(fullnameCard4), getSurname(fullnameCard4)).replace("#", "");
+            char card4 = (char) this.card4.getSelectedItem();
+            GamesManager.addGameCards(gameID, playerCards4Str, card4);
+            }
             
-            String fullnameCard5 = (String)playersWithCards5.getSelectedItem();
-            String playerCards5Str = PlayerManager.getPlayerID(getName(fullnameCard5), getSurname(fullnameCard5)).replace("#","");
-            char card5 = (char)this.card5.getSelectedItem();
-            GamesManager.addGameCards(gameID,playerCards5Str, card5);
-            
-            
-            
-            
+            String fullnameCard5 = (String) playersWithCards5.getSelectedItem();
+            if (fullnameCard5 != null) {
+            String playerCards5Str = PlayerManager.getPlayerID(getName(fullnameCard5), getSurname(fullnameCard5)).replace("#", "");
+            char card5 = (char) this.card5.getSelectedItem();
+            GamesManager.addGameCards(gameID, playerCards5Str, card5);
+            }
 // TODO add your handling code here:
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(AddMatchResult.class.getName()).log(Level.SEVERE, null, ex);
@@ -767,7 +785,7 @@ public class AddMatchResult extends javax.swing.JFrame {
                 } catch (ClassNotFoundException ex) {
                     Logger.getLogger(AddMatchResult.class.getName()).log(Level.SEVERE, null, ex);
                 }
-                
+
             }
         });
     }

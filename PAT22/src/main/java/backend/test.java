@@ -19,7 +19,10 @@ import java.util.Scanner;
 public class test {
     public static void main(String[] args) throws ClassNotFoundException, SQLException {
         
-        System.out.println(GamesManager.getGameID("1", "4"));
+        DB database = new DB();
+        ResultSet getgameIDRS = database.query("SELECT Game.GameID FROM Game  ORDER BY GameID DESC LIMIT 1;");
+        getgameIDRS.next();
+        System.out.println(getgameIDRS.getInt("GameID")); 
     }
     
     
