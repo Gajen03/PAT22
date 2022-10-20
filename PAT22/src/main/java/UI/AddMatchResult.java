@@ -614,107 +614,107 @@ public class AddMatchResult extends javax.swing.JFrame {
 
             //GOALS
             String fullnameGoal1 = (String) PlayersWhosScored1.getSelectedItem();
-            if (fullnameGoal1 != null) {
-                String playerGoalID1Str = PlayerManager.getPlayerID(getName(fullnameGoal1), getSurname(fullnameGoal1)).replace("#", "");
-                int goal1 = (int) goals1.getValue();
-                GamesManager.addGameGoals(gameID, playerGoalID1Str, goal1);
+            if (!fullnameGoal1.equals("")) {
+            String playerGoalID1Str = PlayerManager.getPlayerID(getName(fullnameGoal1), getSurname(fullnameGoal1)).replace("#", "");
+            int goal1 = (int) goals1.getValue();
+            GamesManager.addGameGoals(gameID, playerGoalID1Str, goal1);
             }
 
             String fullnameGoal2 = (String) PlayersWhosScored2.getSelectedItem();
-            if (fullnameGoal2 != null) {
+            if (!fullnameGoal2.equals("")) {
             String playerGoalID2 = PlayerManager.getPlayerID(getName(fullnameGoal2), getSurname(fullnameGoal2)).replace("#", "");
             int goal2 = (int) goals2.getValue();
             GamesManager.addGameGoals(gameID, playerGoalID2, goal2);
             }
             
             String fullnameGoal3 = (String) PlayersWhosScored3.getSelectedItem();
-            if (fullnameGoal3 != null) {
+            if (!fullnameGoal3.equals("")) {
             String playerGoalID3 = PlayerManager.getPlayerID(getName(fullnameGoal3), getSurname(fullnameGoal3)).replace("#", "");
             int goal3 = (int) goals3.getValue();
             GamesManager.addGameGoals(gameID, playerGoalID3, goal3);
             }
             
             String fullnameGoal4 = (String) PlayersWhosScored4.getSelectedItem();
-            if (fullnameGoal4 != null) {
+            if (!fullnameGoal4.equals("")) {
             String playerGoalID4 = PlayerManager.getPlayerID(getName(fullnameGoal4), getSurname(fullnameGoal4)).replace("#", "");
             int goal4 = (int) goals4.getValue();
             GamesManager.addGameGoals(gameID, playerGoalID4, goal4);
             }
             
             String fullnameGoal5 = (String) PlayersWhosScored5.getSelectedItem();
-            if (fullnameGoal5 != null) {
+            if (!fullnameGoal5.equals("")) {
             String playerGoalID5 = PlayerManager.getPlayerID(getName(fullnameGoal5), getSurname(fullnameGoal5)).replace("#", "");
             int goal5 = (int) goals5.getValue();
             GamesManager.addGameGoals(gameID, playerGoalID5, goal5);
             }
             //ASSISTS
             String fullnameAssist1 = (String) playersWhoAssisted1.getSelectedItem();
-            if (fullnameAssist1 != null) {
+            if (!fullnameAssist1.equals("")) {
             String playerAssistID1Str = PlayerManager.getPlayerID(getName(fullnameAssist1), getSurname(fullnameAssist1)).replace("#", "");
             int assist1 = (int) this.assist1.getValue();
             GamesManager.addGameAssists(gameID, playerAssistID1Str, assist1);
             }
             
             String fullnameAssist2 = (String) playersWhoAssisted2.getSelectedItem();
-            if (fullnameAssist2 != null) {
+            if (!fullnameAssist2.equals("")) {
             String playerAssistID2Str = PlayerManager.getPlayerID(getName(fullnameAssist2), getSurname(fullnameAssist2)).replace("#", "");
             int assist2 = (int) this.assist2.getValue();
             GamesManager.addGameAssists(gameID, playerAssistID2Str, assist2);
             }
             
             String fullnameAssist3 = (String) playersWhoAssisted3.getSelectedItem();
-            if (fullnameAssist3 != null) {
+            if (!fullnameAssist3.equals("")) {
             String playerAssistID3Str = PlayerManager.getPlayerID(getName(fullnameAssist3), getSurname(fullnameAssist3)).replace("#", "");
             int assist3 = (int) this.assist3.getValue();
             GamesManager.addGameAssists(gameID, playerAssistID3Str, assist3);
             }
             
             String fullnameAssist4 = (String) playersWhoAssisted4.getSelectedItem();
-            if (fullnameAssist4 != null) {
+            if (!fullnameAssist4.equals("")) {
             String playerAssistID4Str = PlayerManager.getPlayerID(getName(fullnameAssist4), getSurname(fullnameAssist4)).replace("#", "");
             int assist4 = (int) this.assist4.getValue();
             GamesManager.addGameAssists(gameID, playerAssistID4Str, assist4);
             }
             
             String fullnameAssist5 = (String) playersWhoAssisted5.getSelectedItem();
-            if (fullnameAssist5 != null) {
+            if (!fullnameAssist5.equals("")) {
             String playerAssistID5Str = PlayerManager.getPlayerID(getName(fullnameAssist5), getSurname(fullnameAssist5)).replace("#", "");
             int assist5 = (int) this.assist5.getValue();
             GamesManager.addGameAssists(gameID, playerAssistID5Str, assist5);
             }
             //CARDS
             String fullnameCard1 = (String) playersWithCards1.getSelectedItem();
-            if (fullnameCard1 != null) {
+            if (!fullnameCard1.equals("")) {
             String playerCards1Str = PlayerManager.getPlayerID(getName(fullnameCard1), getSurname(fullnameCard1)).replace("#", "");
-            char card1 = (char) this.card1.getSelectedItem();
+            String card1 = (String) this.card1.getSelectedItem();
             GamesManager.addGameCards(gameID, playerCards1Str, card1);
             }
             
             String fullnameCard2 = (String) playersWithCards2.getSelectedItem();
-            if (fullnameCard2 != null) {
+            if (!fullnameCard2.equals("")) {
             String playerCards2Str = PlayerManager.getPlayerID(getName(fullnameCard2), getSurname(fullnameCard2)).replace("#", "");
-            char card2 = (char) this.card2.getSelectedItem();
+            String card2 = (String) this.card2.getSelectedItem();
             GamesManager.addGameCards(gameID, playerCards2Str, card2);
             }
             
             String fullnameCard3 = (String) playersWithCards3.getSelectedItem();
-            if (fullnameCard3 != null) {
+            if (!fullnameCard3.equals("")) {
             String playerCards3Str = PlayerManager.getPlayerID(getName(fullnameCard3), getSurname(fullnameCard3)).replace("#", "");
-            char card3 = (char) this.card3.getSelectedItem();
+            String card3 = (String) this.card3.getSelectedItem();
             GamesManager.addGameCards(gameID, playerCards3Str, card3);
             }
             
             String fullnameCard4 = (String) playersWithCards4.getSelectedItem();
-            if (fullnameCard4 != null) {
+            if (!fullnameCard4.equals("")) {
             String playerCards4Str = PlayerManager.getPlayerID(getName(fullnameCard4), getSurname(fullnameCard4)).replace("#", "");
-            char card4 = (char) this.card4.getSelectedItem();
+            String card4 = (String) this.card4.getSelectedItem();
             GamesManager.addGameCards(gameID, playerCards4Str, card4);
             }
             
             String fullnameCard5 = (String) playersWithCards5.getSelectedItem();
-            if (fullnameCard5 != null) {
+            if (!fullnameCard5.equals("")) {
             String playerCards5Str = PlayerManager.getPlayerID(getName(fullnameCard5), getSurname(fullnameCard5)).replace("#", "");
-            char card5 = (char) this.card5.getSelectedItem();
+            String card5 = (String) this.card5.getSelectedItem();
             GamesManager.addGameCards(gameID, playerCards5Str, card5);
             }
 // TODO add your handling code here:

@@ -50,7 +50,7 @@ public class GamesManager {
         database.update("INSERT INTO Stats(Stats.GameID,Stats.PlayerID,Assists) VALUES('"+gameID+"','"+playerID+"','"+assists+"') ;");
 
     }
-    public static void addGameCards(int gameID,String playerID,char cards) throws ClassNotFoundException, SQLException{
+    public static void addGameCards(int gameID,String playerID,String cards) throws ClassNotFoundException, SQLException{
         DB database = new DB();
         database.update("INSERT INTO Stats(Stats.GameID,Stats.PlayerID,Cards) VALUES('"+gameID+"','"+playerID+"','"+cards+"');");
 

@@ -111,7 +111,7 @@ public class TeamManager {
         return players;
     }
     
-    public static void addPlayerToTeam(char PlayerID,char TeamID) throws ClassNotFoundException, SQLException{
+    public static void addPlayerToTeam(String PlayerID,char TeamID) throws ClassNotFoundException, SQLException{
         DB database = new DB();
         database.update("INSERT INTO TeamPlayer(TeamID,PlayerID) VALUES ('"+TeamID+"','"+PlayerID+"');");
        

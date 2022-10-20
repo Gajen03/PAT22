@@ -320,8 +320,8 @@ public class ManageTeams extends javax.swing.JFrame {
             
             DB database = new DB();
             ResultSet getPlayerID = database.query("SELECT Players.PlayerID FROM Players WHERE Players.Name = '"+name+"' and Players.Surname = '"+surname+"' ;");
-            String playerIDStr = DB.toString(getPlayerID);
-            char playerID = playerIDStr.charAt(1);
+            String playerID = DB.toString(getPlayerID);
+            
             
             
             TeamManager.addPlayerToTeam(playerID, teamID);
