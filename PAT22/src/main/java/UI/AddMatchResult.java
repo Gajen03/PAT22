@@ -185,10 +185,10 @@ public class AddMatchResult extends javax.swing.JFrame {
         card4 = new javax.swing.JComboBox<>();
         card5 = new javax.swing.JComboBox<>();
         jPanel3 = new javax.swing.JPanel();
-        opponentGoalsScoerd = new javax.swing.JTextField();
         OpponentComboBox = new javax.swing.JComboBox<>();
         jLabel4 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
+        opponentGoals = new javax.swing.JSpinner();
         jButton2 = new javax.swing.JButton();
         MatchDateField = new javax.swing.JTextField();
         jLabel10 = new javax.swing.JLabel();
@@ -459,13 +459,6 @@ public class AddMatchResult extends javax.swing.JFrame {
         jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder("Opponent"));
         jPanel3.setForeground(new java.awt.Color(255, 255, 255));
 
-        opponentGoalsScoerd.setText("0");
-        opponentGoalsScoerd.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                opponentGoalsScoerdActionPerformed(evt);
-            }
-        });
-
         OpponentComboBox.setBackground(new java.awt.Color(0, 0, 102));
         OpponentComboBox.setForeground(new java.awt.Color(255, 255, 255));
         OpponentComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
@@ -487,18 +480,18 @@ public class AddMatchResult extends javax.swing.JFrame {
                 .addComponent(OpponentComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 63, Short.MAX_VALUE)
                 .addComponent(jLabel9)
-                .addGap(33, 33, 33)
-                .addComponent(opponentGoalsScoerd, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(101, 101, 101))
+                .addGap(46, 46, 46)
+                .addComponent(opponentGoals, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(240, 240, 240))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGap(35, 35, 35)
+                .addGap(33, 33, 33)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(opponentGoalsScoerd, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jLabel9))
+                        .addComponent(jLabel9)
+                        .addComponent(opponentGoals, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(OpponentComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jLabel4)))
@@ -606,7 +599,7 @@ public class AddMatchResult extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 22, Short.MAX_VALUE))
+                .addGap(0, 24, Short.MAX_VALUE))
         );
 
         pack();
@@ -645,7 +638,8 @@ public class AddMatchResult extends javax.swing.JFrame {
             String teamAID = TeamManager.getTeamID(RHBTeam).replace("#", "").replace("\n", "");
             String OpponentTeam = (String) OpponentComboBox.getSelectedItem();
             String teamBID = TeamManager.getTeamID(OpponentTeam).replace("#", "").replace("\n", "");
-            int gameID = GamesManager.addGame(location, teamAID, teamBID,date);
+            int teamBGoals = (int) opponentGoals.getValue();
+            int gameID = GamesManager.addGame(location, teamAID, teamBID,date,teamBGoals);
             
 
             //GOALS
@@ -763,10 +757,6 @@ public class AddMatchResult extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jButton2ActionPerformed
 
-    private void opponentGoalsScoerdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_opponentGoalsScoerdActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_opponentGoalsScoerdActionPerformed
-
     private void ReddamTeamSelectorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ReddamTeamSelectorActionPerformed
         try {
             updatePlayerCombo();
@@ -872,7 +862,7 @@ public class AddMatchResult extends javax.swing.JFrame {
     private javax.swing.JTextField jTextField2;
     private javax.swing.JTextField jTextField6;
     private javax.swing.JComboBox<String> locationCombo;
-    private javax.swing.JTextField opponentGoalsScoerd;
+    private javax.swing.JSpinner opponentGoals;
     private javax.swing.JComboBox<String> playersWhoAssisted1;
     private javax.swing.JComboBox<String> playersWhoAssisted2;
     private javax.swing.JComboBox<String> playersWhoAssisted3;

@@ -66,26 +66,40 @@ public class PlayerManager {
        }
     }
     
-    public static String getPlayerGoals(char playerID) throws ClassNotFoundException, SQLException{
+    public static String getPlayerGoals(String playerID) throws ClassNotFoundException, SQLException{
         DB databse = new DB();
         ResultSet getGoals = databse.query("SELECT SUM(Goals) FROM Stats WHERE Stats.PlayerID = '"+playerID+"'");
-        
+        if(DB.toString(getGoals) != null){
+            
         return DB.toString(getGoals);
+        }else{
+            return "0";
+        }
     }
     
-    public static String getPlayerAssists(char playerID) throws ClassNotFoundException, SQLException{
+    public static String getPlayerAssists(String playerID) throws ClassNotFoundException, SQLException{
         DB databse = new DB();
         ResultSet getAssists = databse.query("SELECT SUM(Assists) FROM Stats WHERE Stats.PlayerID = '"+playerID+"'");
+        if(DB.toString(getAssists) != null){
+            
         return DB.toString(getAssists);
+        }else{
+            return "0";
+        }
     }
     
-    public static String getPlayerCards(char playerID) throws ClassNotFoundException, SQLException{
+    public static String getPlayerCards(String playerID) throws ClassNotFoundException, SQLException{
         DB databse = new DB();
         ResultSet getCards = databse.query("SELECT SUM(Cards) FROM Stats WHERE Stats.PlayerID = '"+playerID+"'");
+        if(DB.toString(getCards) != null){
+            
         return DB.toString(getCards);
+        }else{
+            return "0";
+        }
     }
     
-    public static String calcOVR(char playerID) throws ClassNotFoundException, SQLException{
+    public static String calcOVR(String playerID) throws ClassNotFoundException, SQLException{
         String goalsStr1 = PlayerManager.getPlayerGoals(playerID);
         String assistsStr1 = PlayerManager.getPlayerAssists(playerID);
         
