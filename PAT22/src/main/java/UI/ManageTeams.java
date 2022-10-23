@@ -278,8 +278,7 @@ public class ManageTeams extends javax.swing.JFrame {
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         try {
              String teamName = (String)teamComboBox.getSelectedItem();
-            String teamIDStr= TeamManager.getTeamID(teamName);
-            char teamID = teamIDStr.charAt(1);
+            String teamID= TeamManager.getTeamID(teamName).replace("#", "");
             String fullname = TeamMembersList.getSelectedValue();
             Scanner sc = new Scanner(fullname);
             String name ="";
@@ -291,11 +290,11 @@ public class ManageTeams extends javax.swing.JFrame {
             
             DB database = new DB();
             ResultSet getPlayerID = database.query("SELECT Players.PlayerID FROM Players WHERE Players.Name = '"+name+"' and Players.Surname = '"+surname+"' ;");
-            String playerIDStr = DB.toString(getPlayerID);
-            char playerID = playerIDStr.charAt(1);
+            String playerID = DB.toString(getPlayerID).replace("#", "");
             
             TeamManager.deletePlayerFromTeam(playerID, teamID);
-
+updateListCurrentAvaPlayers();
+            updateListCurrentTeam();
 // TODO add your handling code here:
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(ManageTeams.class.getName()).log(Level.SEVERE, null, ex);
@@ -307,25 +306,27 @@ public class ManageTeams extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
  try {
             String teamName = (String)teamComboBox.getSelectedItem();
-            String teamIDStr= TeamManager.getTeamID(teamName);
-            char teamID = teamIDStr.charAt(1);
+            String teamID= TeamManager.getTeamID(teamName).replace("#", "");
             String fullname = AvaliblePlyaersList.getSelectedValue();
             Scanner sc = new Scanner(fullname);
             String name ="";
             String surname ="";
+            String gender = "";
             while(sc.hasNext()){
                 name = sc.next();
                 surname = sc.next();
+                gender = sc.next();
             }
             
             DB database = new DB();
             ResultSet getPlayerID = database.query("SELECT Players.PlayerID FROM Players WHERE Players.Name = '"+name+"' and Players.Surname = '"+surname+"' ;");
-            String playerID = DB.toString(getPlayerID);
+            String playerID = DB.toString(getPlayerID).replace("#", "");
             
             
             
             TeamManager.addPlayerToTeam(playerID, teamID);
-
+updateListCurrentAvaPlayers();
+            updateListCurrentTeam();
 // TODO add your handling code here:
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(ManageTeams.class.getName()).log(Level.SEVERE, null, ex);

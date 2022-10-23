@@ -11,6 +11,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Scanner;
+import javax.swing.DefaultListModel;
 
 /**
  *
@@ -19,10 +20,8 @@ import java.util.Scanner;
 public class test {
     public static void main(String[] args) throws ClassNotFoundException, SQLException {
         
-        DB database = new DB();
-        ResultSet getgameIDRS = database.query("SELECT Game.GameID FROM Game  ORDER BY GameID DESC LIMIT 1;");
-        getgameIDRS.next();
-        System.out.println(getgameIDRS.getInt("GameID")); 
+         String playerID = PlayerManager.getPlayerID("Reegan", "McDowell");
+         System.out.println(playerID);
     }
     
     
