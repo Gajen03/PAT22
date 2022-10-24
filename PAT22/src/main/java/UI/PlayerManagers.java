@@ -6,6 +6,7 @@ package UI;
 
 import DBBackend.DB;
 import backend.PlayerManager;
+import backend.TeamManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -354,7 +355,8 @@ public class PlayerManagers extends javax.swing.JFrame {
                 surname = sc.next();
             }
             
-            PlayerManager.removePlayer(name, surname);
+            
+            PlayerManager.removePlayer(PlayerManager.getPlayerID(name, surname));
             
         String [] names = PlayerManager.getAllPlayers();
         DefaultListModel model = new DefaultListModel();

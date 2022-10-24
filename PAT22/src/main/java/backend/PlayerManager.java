@@ -24,9 +24,11 @@ public class PlayerManager {
         database.update("INSERT INTO Players (Players.Name,Surname,Age,Position,KitNumber,Gender) VALUES ('"+name+"', '"+surname+"', '"+age+"','"+position+"','"+kitnumber+"','"+gender+"');");
     }
     
-    public static void removePlayer(String name, String surname) throws SQLException, ClassNotFoundException{
+    public static void removePlayer(String PlayerID) throws SQLException, ClassNotFoundException{
         DB database = new DB();
-        database.update("DELETE FROM Players WHERE Name = '"+name+"' AND Surname = '"+surname+"';");
+        database.update("DELETE FROM Stats WHERE Stats.PlayerID = '"+PlayerID+" '");
+        database.update("DELETE FROM TeamPlayer WHERE TeamPlayer.PlayerID = '"+PlayerID+" '");
+        database.update("DELETE FROM Players WHERE Players.PlayerID = '"+PlayerID+" '");
     }
     
     public static String[] getAllPlayers() throws SQLException, ClassNotFoundException {
@@ -68,24 +70,20 @@ public class PlayerManager {
     
     public static String getPlayerGoals(String playerID) throws ClassNotFoundException, SQLException{
         DB databse = new DB();
-        ResultSet getGoals = databse.query("SELECT SUM(Goals) FROM Stats WHERE Stats.PlayerID = '"+playerID+"'");
-        if(DB.toString(getGoals) != null){
+        ResultSet getGoals = databse.query("SELECT SUM(Goals) FROM Stats WHERE Stats.PlayerID = '"+playerID+"';");
+      
             
         return DB.toString(getGoals);
-        }else{
-            return "0";
-        }
+        
     }
     
     public static String getPlayerAssists(String playerID) throws ClassNotFoundException, SQLException{
         DB databse = new DB();
-        ResultSet getAssists = databse.query("SELECT SUM(Assists) FROM Stats WHERE Stats.PlayerID = '"+playerID+"'");
-        if(DB.toString(getAssists) != null){
+        ResultSet getAssists = databse.query("SELECT SUM(Assists) FROM Stats WHERE Stats.PlayerID = '"+playerID+"';");
+      
             
         return DB.toString(getAssists);
-        }else{
-            return "0";
-        }
+        
     }
     
     public static String getPlayerCards(String playerID) throws ClassNotFoundException, SQLException{
@@ -98,33 +96,45 @@ public class PlayerManager {
             return "0";
         }
     }
-    
+    public static String getPosition(String playerID) throws ClassNotFoundException, SQLException{
+        DB databse = new DB();
+        ResultSet getPos = databse.query("SELECT Position FROM Players WHERE Players.PlayerID = '"+playerID+"'");
+        
+            
+        return DB.toString(getPos);
+        
+        
+    }
     public static String calcOVR(String playerID) throws ClassNotFoundException, SQLException{
-        String goalsStr1 = PlayerManager.getPlayerGoals(playerID);
-        String assistsStr1 = PlayerManager.getPlayerAssists(playerID);
         
-        int goals = 0;
-        if(goalsStr1.contains("null")){
-             goals = 0;
+        String goalsStr1 = PlayerManager.getPlayerGoals(playerID).replace("#", "");
+        String assistsStr1 = PlayerManager.getPlayerAssists(playerID).replace("#", "");
+        int goals =0;
+        int assists=0;
+        if(goalsStr1 !=null){
+            
+         goals = (int)goalsStr1.charAt(1);
         }else{
-            char goalCh = goalsStr1.charAt(1);
-            String goalsStr = ""+goalCh;
-            goals = Integer.parseInt(goalsStr);
+            goals = 0;
         }
         
-        int assists = 0;
-        if(assistsStr1.contains("null")){
+        if(assistsStr1 != null){
+            
+         assists = (int)assistsStr1.charAt(1);
+        }else{
             assists = 0;
-        }else{
-        char assistsCh = assistsStr1.charAt(1);
-        String assistsStr = ""+assistsCh;
-         assists = Integer.parseInt(assistsStr);
         }
         
-        
-        int calc = 70 + goals + assists/2 ;
+        if(getPosition(playerID).equals("GK")){
+        int calc = (75 + goals + assists/2)/2 ;
         String ovr = String.valueOf(calc);
         return ovr;
+        }else{
+            
+        int calc = (70 + goals + assists/2) ;
+        String ovr = String.valueOf(calc);
+        return ovr;
+        }
         
     }
     

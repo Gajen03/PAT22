@@ -61,10 +61,7 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Group type="102" alignment="0" attributes="0">
-              <Component id="jTabbedPane4" min="-2" pref="1105" max="-2" attributes="0"/>
-              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-          </Group>
+          <Component id="jTabbedPane4" alignment="0" pref="1117" max="32767" attributes="0"/>
       </Group>
     </DimensionLayout>
     <DimensionLayout dim="1">
@@ -129,19 +126,19 @@
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Component id="jLabel12" min="-2" max="-2" attributes="0"/>
                                   <Group type="102" alignment="0" attributes="0">
-                                      <Group type="103" groupAlignment="1" max="-2" attributes="0">
-                                          <Group type="102" attributes="0">
+                                      <Group type="103" groupAlignment="1" attributes="0">
+                                          <Group type="102" alignment="1" attributes="0">
                                               <Group type="103" groupAlignment="0" attributes="0">
                                                   <Component id="jLabel13" alignment="0" min="-2" max="-2" attributes="0"/>
                                                   <Component id="jLabel20" alignment="0" min="-2" max="-2" attributes="0"/>
                                               </Group>
                                               <EmptySpace min="-2" pref="23" max="-2" attributes="0"/>
                                               <Group type="103" groupAlignment="0" attributes="0">
-                                                  <Component id="TABoys" max="32767" attributes="0"/>
+                                                  <Component id="TABoys" pref="169" max="32767" attributes="0"/>
                                                   <Component id="TAGirls" max="32767" attributes="0"/>
                                               </Group>
                                           </Group>
-                                          <Group type="102" attributes="0">
+                                          <Group type="102" alignment="1" attributes="0">
                                               <Group type="103" groupAlignment="0" attributes="0">
                                                   <Component id="jLabel7" alignment="0" min="-2" max="-2" attributes="0"/>
                                                   <Group type="103" alignment="0" groupAlignment="0" attributes="0">
@@ -150,13 +147,13 @@
                                                   </Group>
                                               </Group>
                                               <EmptySpace max="-2" attributes="0"/>
-                                              <Group type="103" groupAlignment="0" attributes="0">
-                                                  <Component id="TGSGirls" alignment="0" min="-2" pref="118" max="-2" attributes="0"/>
-                                                  <Component id="TGSBoys" min="-2" pref="118" max="-2" attributes="0"/>
+                                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                                  <Component id="TGSBoys" pref="173" max="32767" attributes="0"/>
+                                                  <Component id="TGSGirls" max="32767" attributes="0"/>
                                               </Group>
                                           </Group>
                                       </Group>
-                                      <EmptySpace min="-2" pref="98" max="-2" attributes="0"/>
+                                      <EmptySpace min="-2" pref="43" max="-2" attributes="0"/>
                                       <Group type="103" groupAlignment="0" attributes="0">
                                           <Component id="jLabel41" alignment="0" min="-2" max="-2" attributes="0"/>
                                           <Group type="102" alignment="0" attributes="0">
@@ -166,14 +163,14 @@
                                               </Group>
                                               <EmptySpace type="unrelated" max="-2" attributes="0"/>
                                               <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                                  <Component id="MCBoys" pref="156" max="32767" attributes="0"/>
+                                                  <Component id="MCBoys" pref="177" max="32767" attributes="0"/>
                                                   <Component id="MCGirls" max="32767" attributes="0"/>
                                               </Group>
                                           </Group>
                                       </Group>
                                   </Group>
                               </Group>
-                              <EmptySpace pref="17" max="32767" attributes="0"/>
+                              <EmptySpace min="-2" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                   </Group>
@@ -799,7 +796,7 @@
             <DimensionLayout dim="0">
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="1" attributes="0">
-                      <EmptySpace pref="210" max="32767" attributes="0"/>
+                      <EmptySpace pref="222" max="32767" attributes="0"/>
                       <Component id="teamOutPut" min="-2" pref="743" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="147" max="-2" attributes="0"/>
                   </Group>
@@ -819,13 +816,13 @@
                               <EmptySpace min="-2" pref="353" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Group type="103" alignment="1" groupAlignment="0" attributes="0">
-                                      <Component id="jTextField17" alignment="0" min="-2" pref="73" max="-2" attributes="0"/>
-                                      <Component id="jTextField18" alignment="0" min="-2" pref="73" max="-2" attributes="0"/>
-                                      <Component id="jTextField13" alignment="0" min="-2" pref="73" max="-2" attributes="0"/>
-                                      <Component id="jTextField11" min="-2" pref="125" max="-2" attributes="0"/>
-                                      <Component id="jTextField19" min="-2" pref="144" max="-2" attributes="0"/>
+                                      <Component id="drawsField" alignment="0" min="-2" pref="73" max="-2" attributes="0"/>
+                                      <Component id="lossesFeild" alignment="0" min="-2" pref="73" max="-2" attributes="0"/>
+                                      <Component id="winsFIeld" alignment="0" min="-2" pref="73" max="-2" attributes="0"/>
+                                      <Component id="teamGoalsField" min="-2" pref="125" max="-2" attributes="0"/>
+                                      <Component id="topG" min="-2" pref="144" max="-2" attributes="0"/>
                                   </Group>
-                                  <Component id="jTextField16" alignment="0" min="-2" pref="144" max="-2" attributes="0"/>
+                                  <Component id="topA" alignment="0" min="-2" pref="144" max="-2" attributes="0"/>
                                   <Component id="coachLable" alignment="0" min="-2" pref="125" max="-2" attributes="0"/>
                               </Group>
                           </Group>
@@ -901,7 +898,7 @@
                                       <EmptySpace max="-2" attributes="0"/>
                                       <Group type="103" groupAlignment="1" attributes="0">
                                           <Group type="102" alignment="1" attributes="0">
-                                              <Component id="jTextField11" min="-2" pref="24" max="-2" attributes="0"/>
+                                              <Component id="teamGoalsField" min="-2" pref="24" max="-2" attributes="0"/>
                                               <EmptySpace min="295" pref="295" max="-2" attributes="0"/>
                                           </Group>
                                           <Group type="102" alignment="1" attributes="0">
@@ -909,11 +906,11 @@
                                                   <Group type="103" alignment="1" groupAlignment="0" attributes="0">
                                                       <Group type="102" alignment="0" attributes="0">
                                                           <EmptySpace min="36" pref="36" max="-2" attributes="0"/>
-                                                          <Component id="jTextField17" min="-2" pref="24" max="-2" attributes="0"/>
+                                                          <Component id="drawsField" min="-2" pref="24" max="-2" attributes="0"/>
                                                           <EmptySpace max="-2" attributes="0"/>
-                                                          <Component id="jTextField18" min="-2" pref="24" max="-2" attributes="0"/>
+                                                          <Component id="lossesFeild" min="-2" pref="24" max="-2" attributes="0"/>
                                                       </Group>
-                                                      <Component id="jTextField13" alignment="0" min="-2" pref="24" max="-2" attributes="0"/>
+                                                      <Component id="winsFIeld" alignment="0" min="-2" pref="24" max="-2" attributes="0"/>
                                                   </Group>
                                                   <Group type="102" alignment="1" attributes="0">
                                                       <Component id="coachLable" min="-2" pref="24" max="-2" attributes="0"/>
@@ -923,11 +920,11 @@
                                               <Group type="103" groupAlignment="0" attributes="0">
                                                   <Group type="102" alignment="1" attributes="0">
                                                       <EmptySpace min="138" pref="138" max="-2" attributes="0"/>
-                                                      <Component id="jTextField16" min="-2" pref="24" max="-2" attributes="0"/>
+                                                      <Component id="topA" min="-2" pref="24" max="-2" attributes="0"/>
                                                   </Group>
                                                   <Group type="102" alignment="0" attributes="0">
                                                       <EmptySpace min="-2" pref="45" max="-2" attributes="0"/>
-                                                      <Component id="jTextField19" min="-2" pref="24" max="-2" attributes="0"/>
+                                                      <Component id="topG" min="-2" pref="24" max="-2" attributes="0"/>
                                                   </Group>
                                               </Group>
                                           </Group>
@@ -1030,19 +1027,19 @@
                 <Property name="text" type="java.lang.String" value="Team Coach:"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JTextField" name="jTextField11">
+            <Component class="javax.swing.JTextField" name="teamGoalsField">
             </Component>
-            <Component class="javax.swing.JTextField" name="jTextField13">
+            <Component class="javax.swing.JTextField" name="winsFIeld">
             </Component>
             <Component class="javax.swing.JTextField" name="coachLable">
             </Component>
-            <Component class="javax.swing.JTextField" name="jTextField16">
+            <Component class="javax.swing.JTextField" name="topA">
             </Component>
-            <Component class="javax.swing.JTextField" name="jTextField17">
+            <Component class="javax.swing.JTextField" name="drawsField">
             </Component>
-            <Component class="javax.swing.JTextField" name="jTextField18">
+            <Component class="javax.swing.JTextField" name="lossesFeild">
             </Component>
-            <Component class="javax.swing.JTextField" name="jTextField19">
+            <Component class="javax.swing.JTextField" name="topG">
             </Component>
             <Component class="javax.swing.JComboBox" name="TeamSelector">
               <Properties>
@@ -1488,7 +1485,7 @@
                                       <Component id="location" min="-2" pref="56" max="-2" attributes="0"/>
                                   </Group>
                               </Group>
-                              <EmptySpace pref="121" max="32767" attributes="0"/>
+                              <EmptySpace pref="133" max="32767" attributes="0"/>
                           </Group>
                           <Group type="102" alignment="0" attributes="0">
                               <Group type="103" groupAlignment="0" attributes="0">

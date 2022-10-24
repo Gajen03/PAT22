@@ -19,7 +19,9 @@ import javax.swing.DefaultListModel;
  */
 public class test {
     public static void main(String[] args) throws ClassNotFoundException, SQLException {
-        System.out.println(PlayerManager.getPlayerID("Gajen", "Naidoo"));
+        
+        System.out.println(PlayerManager.getPlayerGoals("2"));
+                
     }
     
     

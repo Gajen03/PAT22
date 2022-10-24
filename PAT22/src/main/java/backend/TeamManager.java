@@ -48,12 +48,12 @@ public class TeamManager {
         
 
         ResultSet countQueryTeamPlayer = database.query("SELECT COUNT(*) FROM Players, TeamPlayer, Teams WHERE (Teams.TeamID=TeamPlayer.TeamID AND TeamPlayer.PlayerID = Players.PlayerID) AND (Teams.Name = \'"+teamName+"\');");
-        countQueryTeamPlayer.next();
-        int numRows = countQueryTeamPlayer.getInt(1);
+//        countQueryTeamPlayer.next();
+//        int numRows = countQueryTeamPlayer.getInt(1);
 
 
         ResultSet dbData = database.query("SELECT Players.Name , Players.Surname ,Age,Position,KitNumber FROM Players, TeamPlayer, Teams WHERE (Teams.TeamID=TeamPlayer.TeamID AND TeamPlayer.PlayerID = Players.PlayerID) AND (Teams.Name = \'"+teamName+"\');");
-        String[][] outputTable = new String[numRows][6];
+        String[][] outputTable = new String[10000][6];
         int count = 0;
         while (dbData.next()) {
             outputTable[count][0] = dbData.getString("Name");
