@@ -73,7 +73,7 @@ public class PlayerManager {
         ResultSet getGoals = databse.query("SELECT SUM(Goals) FROM Stats WHERE Stats.PlayerID = '"+playerID+"';");
       
             
-        return DB.toString(getGoals);
+        return DB.toString(getGoals).replace("#", "");
         
     }
     
@@ -82,19 +82,17 @@ public class PlayerManager {
         ResultSet getAssists = databse.query("SELECT SUM(Assists) FROM Stats WHERE Stats.PlayerID = '"+playerID+"';");
       
             
-        return DB.toString(getAssists);
+        return DB.toString(getAssists).replace("#", "");
         
     }
     
     public static String getPlayerCards(String playerID) throws ClassNotFoundException, SQLException{
         DB databse = new DB();
-        ResultSet getCards = databse.query("SELECT SUM(Cards) FROM Stats WHERE Stats.PlayerID = '"+playerID+"'");
-        if(DB.toString(getCards) != null){
+        ResultSet getCards = databse.query("SELECT COUNT(Cards) FROM Stats WHERE Stats.PlayerID = '"+playerID+"'");
+       
             
         return DB.toString(getCards);
-        }else{
-            return "0";
-        }
+       
     }
     public static String getPosition(String playerID) throws ClassNotFoundException, SQLException{
         DB databse = new DB();
@@ -107,34 +105,19 @@ public class PlayerManager {
     }
     public static String calcOVR(String playerID) throws ClassNotFoundException, SQLException{
         
-        String goalsStr1 = PlayerManager.getPlayerGoals(playerID).replace("#", "");
-        String assistsStr1 = PlayerManager.getPlayerAssists(playerID).replace("#", "");
-        int goals =0;
-        int assists=0;
-        if(goalsStr1 !=null){
-            
-         goals = (int)goalsStr1.charAt(1);
+       DB databse = new DB();
+      
+        ResultSet getOvr = databse.query("SELECT (SUM(Goals)+SUM(Assists)+70) FROM Stats WHERE Stats.PlayerID = '" + playerID + "';");
+
+        String ovr = DB.toString(getOvr).replace("\\n", "").replace("#", "");
+        if (ovr.contains("null")) {
+
+            return "70";
         }else{
-            goals = 0;
+            return DB.toString(getOvr);
         }
-        
-        if(assistsStr1 != null){
-            
-         assists = (int)assistsStr1.charAt(1);
-        }else{
-            assists = 0;
-        }
-        
-        if(getPosition(playerID).equals("GK")){
-        int calc = (75 + goals + assists/2)/2 ;
-        String ovr = String.valueOf(calc);
-        return ovr;
-        }else{
-            
-        int calc = (70 + goals + assists/2) ;
-        String ovr = String.valueOf(calc);
-        return ovr;
-        }
+
+
         
     }
     

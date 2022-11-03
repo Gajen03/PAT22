@@ -321,7 +321,7 @@ public class HomeScreen extends javax.swing.JFrame {
         jLabel42.setText("boy most cards name ");
 
         jLabel43.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel43.setText("girl most cardsname");
+        jLabel43.setText("girl most cards name");
 
         TAGirls.setBackground(new java.awt.Color(0, 0, 51));
         TAGirls.setForeground(new java.awt.Color(255, 255, 255));
@@ -1321,8 +1321,13 @@ public class HomeScreen extends javax.swing.JFrame {
             goalsField.setText(""+PlayerManager.getPlayerGoals(playerID));
             assistField.setText(""+PlayerManager.getPlayerAssists(playerID));
             cards.setText(PlayerManager.getPlayerCards(playerID).replace("#", ""));
-            ovrField.setText(PlayerManager.calcOVR(playerID).replace("#", ""));
             positon.setText(PlayerManager.getPosition(playerID).replace("#", ""));
+
+            if(PlayerManager.calcOVR(playerID).replace("#", "") == null){
+            ovrField.setText("70");                
+            }else{
+                ovrField.setText(PlayerManager.calcOVR(playerID).replace("#", ""));
+            }
 // TODO add your handling code here:
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(HomeScreen.class.getName()).log(Level.SEVERE, null, ex);
